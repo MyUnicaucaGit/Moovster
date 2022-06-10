@@ -1,4 +1,4 @@
-package edu.unicauca.moovster.ui.dashboard
+package edu.unicauca.moovster.ui.favourites
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

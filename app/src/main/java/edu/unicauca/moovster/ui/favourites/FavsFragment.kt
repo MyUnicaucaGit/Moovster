@@ -1,4 +1,4 @@
-package edu.unicauca.moovster.ui.dashboard
+package edu.unicauca.moovster.ui.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import edu.unicauca.moovster.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class FavsFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 

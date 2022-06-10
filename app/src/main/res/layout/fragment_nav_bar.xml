@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.navbar.NavBar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnFilter"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/btnFilter"
+            android:textSize="10sp"
+            app:icon="@drawable/menu"
+            app:iconGravity="top"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            app:iconTint="@color/icons_color" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/letter_white"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/btnNBUser"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/title_profile"
+            android:textSize="10sp"
+            app:icon="@drawable/user"
+            app:iconGravity="top"
+            app:iconPadding="0dp"
+            app:iconSize="30dp"
+            app:iconTint="@color/icons_color" />
+    </LinearLayout>
+</FrameLayout>

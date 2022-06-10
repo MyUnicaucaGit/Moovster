@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
-        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/activity_main.xml" value="0.22072451558550968" />
+        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_home.xml" value="0.13645833333333332" />
+        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_nav_bar.xml" value="0.22" />
+        <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_nav_bar2.xml" value="0.2" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/fragment_notifications.xml" value="0.25" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
       </map>
