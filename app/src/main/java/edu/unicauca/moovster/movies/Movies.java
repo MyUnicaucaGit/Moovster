@@ -18,8 +18,13 @@ import java.util.ArrayList;
 public class Movies {
     private RequestQueue queue;
     private String url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f1961361867f54b54c406ca37edb2ed9";
-    private JSONArray movies;
+
+    public ArrayList<Movie> getRequestedList() {
+        return requestedList;
+    }
+
     private Context context;
+    private ArrayList<Movie> requestedList;
 
     public Movies(Context context) {
         queue = Volley.newRequestQueue(context);
@@ -27,15 +32,16 @@ public class Movies {
 
     }
 
-    public ArrayList<Movie> getMoviesByPopularity() throws JSONException {
+    public void getMoviesByPopularity(final VolleyCallBack callBack) throws JSONException {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("entro");
                         try {
                             JSONObject myJson = new JSONObject(response);
-                            movies = myJson.getJSONArray("results");
+                            JSONArray movies = myJson.getJSONArray("results");
+                            requestedList = JSONtoMovies(movies);
+                            callBack.onSuccess();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -50,7 +56,6 @@ public class Movies {
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
         //return  JSONtoMovies(movies);
-        return null;
 
     }
 
@@ -59,7 +64,11 @@ public class Movies {
 
         for (int i = 0; i < arrayMovies.length(); i++) {
             JSONObject object = arrayMovies.getJSONObject(i);
-            movieList.add(new Movie(object.getInt("id"),object.getString("title"), object.getDouble("vote_average")));
+            movieList.add(new Movie(object.getInt("id"),
+                    object.getString("title"),
+                    object.getDouble("vote_average"),
+                    object.getString("poster_path")
+            ));
         }
         return movieList;
     }

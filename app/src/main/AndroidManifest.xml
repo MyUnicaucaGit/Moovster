@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/moovster"
         android:supportsRtl="true"
         android:theme="@style/Theme.Moovster"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"

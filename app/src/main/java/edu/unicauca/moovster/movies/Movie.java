@@ -4,11 +4,18 @@ public class Movie {
     private int id;
     private String name;
     private double rate;
+    private String urlImage;
 
-    public Movie(int id, String name, double rate) {
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public Movie(int id, String name, double rate, String urlImage) {
         this.id = id;
         this.name = name;
         this.rate = rate;
+        this.urlImage = "https://image.tmdb.org/t/p/w500"+urlImage;
+
     }
 
     public int getId() {

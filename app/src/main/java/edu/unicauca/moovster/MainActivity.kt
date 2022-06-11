@@ -14,7 +14,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import edu.unicauca.moovster.databinding.ActivityMainBinding
+import edu.unicauca.moovster.movies.Movie
 import edu.unicauca.moovster.movies.Movies
+import edu.unicauca.moovster.movies.VolleyCallBack
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -51,9 +53,6 @@ class MainActivity : AppCompatActivity() {
         navView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setBackgroundColor(getResources().getColor(R.color.emotionless_purple));
 
-
-        val myMovies = Movies(this);
-        myMovies.getMoviesByPopularity()
 
 
     }
