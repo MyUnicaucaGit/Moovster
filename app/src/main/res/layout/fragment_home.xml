@@ -22,4 +22,11 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
+    <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerCarousel"
+        tools:ignore="MissingConstraints">
+    </com.jackandphantom.carouselrecyclerview.CarouselRecyclerview>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

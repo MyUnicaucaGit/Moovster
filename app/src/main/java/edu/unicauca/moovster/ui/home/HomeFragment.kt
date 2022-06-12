@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jackandphantom.carouselrecyclerview.CarouselLayoutManager
+import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import edu.unicauca.moovster.R
 import edu.unicauca.moovster.adapter.MovieAdapter
+import edu.unicauca.moovster.adapter.MovieAdapterC
 import edu.unicauca.moovster.adapter.MovieViewHolder
 import edu.unicauca.moovster.databinding.FragmentHomeBinding
 import edu.unicauca.moovster.movies.Movie
@@ -53,10 +57,19 @@ class HomeFragment : Fragment() {
         val moviList:ArrayList<Movie> = ArrayList<Movie>();
 
         myMovies.getMoviesByPopularity(VolleyCallBack {
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerMoviesHome)
+            val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
             recyclerView.layoutManager=LinearLayoutManager(context)
-            recyclerView.adapter=MovieAdapter(myMovies.requestedList)
-myMovies.requestedList
+            recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
+            recyclerView.set3DItem(true)
+            recyclerView.setAlpha(true)
+            myMovies.requestedList
+
+            recyclerView.setItemSelectListener(object : CarouselLayoutManager.OnSelected
+            {
+                override fun onItemSelected(position: Int) {
+                    Toast.makeText(context,myMovies.requestedList[position].urlImage, Toast.LENGTH_LONG);
+                }
+            })
             System.out.println("d")
         })
     }}
