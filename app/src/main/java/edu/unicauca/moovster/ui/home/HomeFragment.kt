@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
         val myMovies = Movies(context);
         val moviList:ArrayList<Movie> = ArrayList<Movie>();
 
-        myMovies.getMoviesByPopularity(VolleyCallBack {
+        myMovies.getMoviesByGender(listOf("Acción","Comedia","Animación"),VolleyCallBack {
             val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
             recyclerView.layoutManager=LinearLayoutManager(context)
             recyclerView.adapter= MovieAdapterC(myMovies.requestedList)

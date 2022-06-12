@@ -14,10 +14,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Movies {
     private RequestQueue queue;
-    private String url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f1961361867f54b54c406ca37edb2ed9";
+    private String url = "https://api.themoviedb.org/3/discover/movie?";
+    private JSONArray genresList;
 
     public ArrayList<Movie> getRequestedList() {
         return requestedList;
@@ -25,15 +27,72 @@ public class Movies {
 
     private Context context;
     private ArrayList<Movie> requestedList;
+    private Movie requestedMovie;
 
     public Movies(Context context) {
+
+        try {
+            genresList = new JSONArray("[{\"id\":28,\"name\":\"Acción\"},{\"id\":12,\"name\":\"Aventura\"},{\"id\":16,\"name\":\"Animación\"},{\"id\":35,\"name\":\"Comedia\"},{\"id\":80,\"name\":\"Crimen\"},{\"id\":99,\"name\":\"Documental\"},{\"id\":18,\"name\":\"Drama\"},{\"id\":10751,\"name\":\"Familia\"},{\"id\":14,\"name\":\"Fantasía\"},{\"id\":36,\"name\":\"Historia\"},{\"id\":27,\"name\":\"Terror\"},{\"id\":10402,\"name\":\"Música\"},{\"id\":9648,\"name\":\"Misterio\"},{\"id\":10749,\"name\":\"Romance\"},{\"id\":878,\"name\":\"Ciencia ficción\"},{\"id\":10770,\"name\":\"Película de TV\"},{\"id\":53,\"name\":\"Suspense\"},{\"id\":10752,\"name\":\"Bélica\"},{\"id\":37,\"name\":\"Western\"}]");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         queue = Volley.newRequestQueue(context);
-        // Request a string response from the provided URL.
 
     }
 
     public void getMoviesByPopularity(final VolleyCallBack callBack) throws JSONException {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        String par ="sort_by=popularity.desc";
+        StringRequest req = query(par, callBack);
+        // Add the request to the RequestQueue.
+        queue.add(req);
+        //return  JSONtoMovies(movies);
+    }
+
+    public void getMovie(int id, final VolleyCallBack callBack) throws JSONException {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/movie/"+id+"?api_key=f1961361867f54b54c406ca37edb2ed9&language=es",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject movie = new JSONObject(response);
+                            requestedMovie=JSONtoMovie(movie);
+                            callBack.onSuccess();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("fallo");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        //return  JSONtoMovies(movies);
+
+    }
+
+
+    public void getMoviesByGender(List<String> genres, VolleyCallBack callBack) throws JSONException {
+        String par="";
+        for (int i = 0; i < genres.size(); i++) {
+            for (int j = 0; j < genresList.length(); j++) {
+                JSONObject json = genresList.getJSONObject(j);
+                if (genres.get(i).equalsIgnoreCase(json.getString("name"))){
+                    par=par+"with_genres="+json.getString("id")+"&";
+                }
+            }
+        }
+
+        StringRequest req = query(par, callBack);
+        queue.add(req);
+
+    }
+
+    private StringRequest query(String parameters, final VolleyCallBack callBack){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url+parameters+"&api_key=f1961361867f54b54c406ca37edb2ed9&language=es",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -53,9 +112,7 @@ public class Movies {
             }
         });
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-        //return  JSONtoMovies(movies);
+        return stringRequest;
 
     }
 
@@ -64,14 +121,30 @@ public class Movies {
 
         for (int i = 0; i < arrayMovies.length(); i++) {
             JSONObject object = arrayMovies.getJSONObject(i);
-            movieList.add(new Movie(object.getInt("id"),
-                    object.getString("title"),
-                    object.getDouble("vote_average"),
-                    object.getString("poster_path")
-            ));
+            movieList.add(JSONtoMovie(object));
         }
         return movieList;
     }
 
+    private Movie JSONtoMovie(JSONObject movieJson) throws JSONException {
+        Movie m = new Movie();
+        m.setId(movieJson.getInt("id"));
+        m.setName(movieJson.getString("title"));
+        m.setRate(movieJson.getDouble("vote_average"));
+        m.setUrlImage(movieJson.getString("poster_path"));
+        m.setOverview(movieJson.getString("overview"));
+        return m;
+    }
 
+    public void setRequestedList(ArrayList<Movie> requestedList) {
+        this.requestedList = requestedList;
+    }
+
+    public Movie getRequestedMovie() {
+        return requestedMovie;
+    }
+
+    public void setRequestedMovie(Movie requestedMovie) {
+        this.requestedMovie = requestedMovie;
+    }
 }
