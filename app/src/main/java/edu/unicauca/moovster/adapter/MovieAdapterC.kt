@@ -16,6 +16,10 @@ class MovieAdapterC (private val moviesList: ArrayList<Movie>): RecyclerView.Ada
         return MovieViewHolderCarousel(layoutInflater.inflate(R.layout.item_view_carousel,parent,false));
     }
 
+    override fun onFailedToRecycleView(holder: MovieViewHolderCarousel): Boolean {
+        return super.onFailedToRecycleView(holder)
+    }
+
     override fun getItemCount(): Int {
         return moviesList.size
     }
