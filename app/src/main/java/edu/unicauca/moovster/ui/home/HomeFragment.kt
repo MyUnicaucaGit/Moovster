@@ -59,10 +59,11 @@ class HomeFragment : Fragment() {
         myMovies.getMoviesByGender(listOf("Acción","Comedia","Animación"),VolleyCallBack {
             val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
             recyclerView.layoutManager=LinearLayoutManager(context)
-            recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
+            try {
+                recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
+            }catch (e:Exception){}
             recyclerView.set3DItem(true)
             recyclerView.setAlpha(true)
-            myMovies.requestedList
 
             recyclerView.setItemSelectListener(object : CarouselLayoutManager.OnSelected
             {
@@ -73,3 +74,4 @@ class HomeFragment : Fragment() {
             System.out.println("d")
         })
     }}
+

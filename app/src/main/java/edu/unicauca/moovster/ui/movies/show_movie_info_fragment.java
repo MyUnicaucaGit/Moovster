@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 
+import java.util.Calendar;
+
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
@@ -78,9 +80,15 @@ public class show_movie_info_fragment extends Fragment {
                 public void onSuccess() {
                     Movie movie = gesMovies.getRequestedMovie();
                     TextView title = view.findViewById(R.id.infoMovieTxtTitle);
+                    TextView dateYear = view.findViewById(R.id.infoMovieTxtYear);
                     TextView overview = view.findViewById(R.id.infoMovieTxtOverview);
                     ImageView image = view.findViewById(R.id.infoMovieImg);
+                    TextView duration = view.findViewById(R.id.infoMovieTxtDuration);
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(movie.getRealease_date());
+                    dateYear.setText( String.valueOf( calendar.get(Calendar.YEAR)));
                     title.setText(movie.getName());
+                    duration.setText(movie.getDuration() + " min");
                     overview.setText(movie.getOverview());
                     Glide.with(view)
                             .load(movie.getUrlImage())

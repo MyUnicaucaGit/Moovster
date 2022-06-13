@@ -56,6 +56,7 @@ public class Movies {
                         try {
                             JSONObject movie = new JSONObject(response);
                             requestedMovie=JSONtoMovie(movie);
+                            requestedMovie.setDuration(movie.getInt("runtime"));
                             callBack.onSuccess();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -133,6 +134,7 @@ public class Movies {
         m.setRate(movieJson.getDouble("vote_average"));
         m.setUrlImage(movieJson.getString("poster_path"));
         m.setOverview(movieJson.getString("overview"));
+        m.setRealease_date(movieJson.getString("release_date"));
         return m;
     }
 
