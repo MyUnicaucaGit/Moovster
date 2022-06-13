@@ -4,8 +4,9 @@
     <string name="title_favs">Favourites</string>
     <string name="title_profile">Profile</string>
     <string name="btnFilter">Filter</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="showMovieInfoYear">Year:</string>
+    <string name="showMovieInfoGenres">Genres:</string>
+    <string name="showMovieInfoDuration">Duration:</string>
+    <string name="showMovieInfoOverview">Overview:</string>
 
 </resources>

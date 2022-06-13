@@ -3,7 +3,9 @@ package edu.unicauca.moovster.movies;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Movie {
     private int id;
@@ -13,6 +15,7 @@ public class Movie {
     private String overview;
     private Date realease_date;
     private int duration;
+    private ArrayList<String> genres;
 
     public Movie() {
     }
@@ -30,6 +33,23 @@ public class Movie {
         }
         ;
 
+    }
+
+    public ArrayList<String> getGenres() {
+        return genres;
+    }
+
+    public String getGenresString(){
+        String res="";
+        for (int i = 0; i < this.genres.size(); i++) {
+            res=res+this.genres.get(i)+", ";
+        }
+        res = res.substring(0,res.length()-2);
+        return res;
+    }
+
+    public void setGenres(ArrayList<String> genres) {
+        this.genres = genres;
     }
 
     public int getDuration() {
