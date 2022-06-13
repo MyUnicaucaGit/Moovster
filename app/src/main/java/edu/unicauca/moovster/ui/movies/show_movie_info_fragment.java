@@ -77,7 +77,7 @@ public class show_movie_info_fragment extends Fragment {
 
         Movies gesMovies = new Movies(getContext());
         try {
-            gesMovies.getMovie(675353, new VolleyCallBack() {
+            gesMovies.getMovie(152601, new VolleyCallBack() {
                 @Override
                 public void onSuccess() {
                     Movie movie = gesMovies.getRequestedMovie();
