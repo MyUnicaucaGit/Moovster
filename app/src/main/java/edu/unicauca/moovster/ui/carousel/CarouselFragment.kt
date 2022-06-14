@@ -60,7 +60,9 @@ class CarouselFragment(var gender: String) : Fragment(){
                 recyclerView.adapter= adapter
                 adapter.setOnItemClickListener(object : MovieAdapterC.onItemClickListener{
                     override fun onItemClick(position: Int) {
-                        val fragmentInformation: Fragment = show_movie_info_fragment()
+                        val id = myMovies.requestedList.get(position).id;
+                        val fragmentInformation: Fragment = show_movie_info_fragment(id)
+
                         activity?.supportFragmentManager?.beginTransaction()
                             ?.replace(edu.unicauca.moovster.R.id.containerHome,fragmentInformation)?.commit()
                     }
