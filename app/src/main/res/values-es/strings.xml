@@ -5,4 +5,8 @@
     <string name="title_favs">Favoritos</string>
     <string name="title_profile">Perfil</string>
     <string name="btnFilter">Filtrar</string>
+    <string name="showMovieInfoYear">Año:</string>
+    <string name="showMovieInfoGenres">Generos:</string>
+    <string name="showMovieInfoDuration">Duración:</string>
+    <string name="showMovieInfoOverview">Sinopsis:</string>
 </resources>

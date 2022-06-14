@@ -57,6 +57,7 @@ public class Movies {
                             JSONObject movie = new JSONObject(response);
                             requestedMovie=JSONtoMovie(movie);
                             requestedMovie.setDuration(movie.getInt("runtime"));
+                            requestedMovie.setGenres(getGenresList(movie));
                             callBack.onSuccess();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -148,5 +149,23 @@ public class Movies {
 
     public void setRequestedMovie(Movie requestedMovie) {
         this.requestedMovie = requestedMovie;
+    }
+
+    private ArrayList<String> getGenresList(JSONObject movie) throws JSONException {
+        ArrayList<String> res= new ArrayList<String>();
+        JSONArray genre_ids = movie.getJSONArray("genres");
+
+        for (int i = 0; i < genre_ids.length(); i++) {
+            for (int j = 0; j < genresList.length(); j++) {
+                JSONObject json = genresList.getJSONObject(j);
+                if (genre_ids.getJSONObject(i).getInt("id") == json.getInt("id")){
+                    res.add(json.getString("name"));
+                }
+            }
+        }
+
+
+
+        return res;
     }
 }
