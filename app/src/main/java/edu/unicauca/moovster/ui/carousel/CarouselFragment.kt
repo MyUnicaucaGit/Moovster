@@ -34,11 +34,6 @@ class CarouselFragment(var gender: String) : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         val root: View = inflater.inflate(R.layout.fragment_carousel, container, false)
-
-        val title : TextView? = view?.findViewById<TextView>(R.id.title_card)
-        title?.text = gender
-
-
         return root
     }
 
@@ -48,28 +43,30 @@ class CarouselFragment(var gender: String) : Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
+        val title : TextView? = view?.findViewById<TextView>(R.id.title_card)
+        title?.text=this.gender;
+        val myMovies = Movies(context);
 
-    val myMovies = Movies(context);
-    val moviList:ArrayList<Movie> = ArrayList<Movie>();
 
-    myMovies.getMoviesByGender(listOf(gender), VolleyCallBack {
-        val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
-        recyclerView.layoutManager= LinearLayoutManager(context)
-        try {
-            recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
-        }
-        catch (e:Exception){}
-        recyclerView.set3DItem(true)
-        recyclerView.setAlpha(true)
-        recyclerView.setInfinite(true)
-        myMovies.requestedList
 
-        recyclerView.setItemSelectListener(object : CarouselLayoutManager.OnSelected
-        {
-            override fun onItemSelected(position: Int) {
-                Toast.makeText(context,myMovies.requestedList[position].urlImage, Toast.LENGTH_LONG);
+        myMovies.getMoviesByGender(listOf(gender), VolleyCallBack {
+            val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
+            recyclerView.layoutManager= LinearLayoutManager(context)
+            try {
+                recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
             }
+            catch (e:Exception){}
+            recyclerView.set3DItem(true)
+            recyclerView.setAlpha(true)
+            recyclerView.setInfinite(true)
+            myMovies.requestedList
+
+            recyclerView.setItemSelectListener(object : CarouselLayoutManager.OnSelected
+            {
+                override fun onItemSelected(position: Int) {
+                    Toast.makeText(context,myMovies.requestedList[position].urlImage, Toast.LENGTH_LONG);
+                }
+            })
         })
-    })
 }}

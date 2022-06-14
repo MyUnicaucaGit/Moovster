@@ -49,9 +49,11 @@ class HomeFragment : Fragment() {
 
         val fragmentAnimacion: Fragment = CarouselFragment("Animación");
         val fragmentAccion: Fragment = CarouselFragment("Acción");
+        val fragmentA2: Fragment = CarouselFragment("Acción");
         activity?.supportFragmentManager?.beginTransaction()
             ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentAnimacion)
             ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentAccion)
+            ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentA2)
             ?.commit();
     }
 }

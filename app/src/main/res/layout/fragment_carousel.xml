@@ -15,44 +15,45 @@
         app:cardCornerRadius="20dp"
         app:cardElevation="16dp"
         app:contentPadding="10dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="20dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/infoCard">
-            <ImageView
-                android:id="@+id/infoMovieImg"
-                android:layout_width="80dp"
-                android:layout_height="60dp"
-                android:src="@drawable/moovster"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                />
-            <TextView
-                android:id="@+id/title_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/letter_white"
-                android:textStyle="bold"
-                android:textSize="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_toRightOf="@id/infoMovieImg"
-                android:layout_toEndOf="@id/infoMovieImg"
-                android:layout_alignParentTop="true"
-               ></TextView>
-</LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/infoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/infoMovieImg"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="0"
+                    android:src="@drawable/moovster" />
+
+                <TextView
+                    android:id="@+id/title_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="@color/letter_white"
+                    android:textSize="20dp"
+                    android:textStyle="bold"></TextView>
+
+            </LinearLayout>
+
             <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                 android:id="@+id/recyclerCarousel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/infoCard"
-                ></com.jackandphantom.carouselrecyclerview.CarouselRecyclerview>
+                android:layout_height="200dp"
+                android:layout_below="@id/infoCard"></com.jackandphantom.carouselrecyclerview.CarouselRecyclerview>
 
         </RelativeLayout>
 

@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     tools:context=".ui.home.HomeFragment">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
+
         <LinearLayout
+            android:id="@+id/containerHome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/containerHome"
-            tools:ignore="MissingConstraints"
-            android:orientation="vertical">
+            android:clipChildren="true"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
         </LinearLayout>
     </ScrollView>
 
