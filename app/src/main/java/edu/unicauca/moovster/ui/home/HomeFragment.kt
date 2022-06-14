@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import edu.unicauca.moovster.R
 import edu.unicauca.moovster.adapter.MovieViewHolder
 import edu.unicauca.moovster.databinding.FragmentHomeBinding
 import edu.unicauca.moovster.ui.carousel.CarouselFragment
@@ -44,8 +45,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Create new fragment
-        val fragmentManager: Fragment = CarouselFragment();
+
+
+        val fragmentAnimacion: Fragment = CarouselFragment("Animación");
+        val fragmentAccion: Fragment = CarouselFragment("Acción");
         activity?.supportFragmentManager?.beginTransaction()
-            ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentManager)?.commit();
+            ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentAnimacion)
+            ?.add(edu.unicauca.moovster.R.id.containerHome,fragmentAccion)
+            ?.commit();
     }
 }

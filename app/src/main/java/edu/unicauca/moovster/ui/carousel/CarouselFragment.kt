@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,19 +20,25 @@ import edu.unicauca.moovster.movies.Movie
 import edu.unicauca.moovster.movies.Movies
 import edu.unicauca.moovster.movies.VolleyCallBack
 import edu.unicauca.moovster.ui.home.HomeViewModel
+import org.w3c.dom.Text
 
-class CarouselFragment : Fragment(){
+class CarouselFragment(var gender: String) : Fragment(){
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<MovieViewHolder>? = null
     private var _binding: FragmentHomeBinding? = null
-
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         val root: View = inflater.inflate(R.layout.fragment_carousel, container, false)
+
+        val title : TextView? = view?.findViewById<TextView>(R.id.title_card)
+        title?.text = gender
+
+
         return root
     }
 
@@ -46,14 +53,13 @@ class CarouselFragment : Fragment(){
     val myMovies = Movies(context);
     val moviList:ArrayList<Movie> = ArrayList<Movie>();
 
-    myMovies.getMoviesByGender(listOf("Acción","Comedia","Animación"), VolleyCallBack {
+    myMovies.getMoviesByGender(listOf(gender), VolleyCallBack {
         val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
         recyclerView.layoutManager= LinearLayoutManager(context)
         try {
             recyclerView.adapter= MovieAdapterC(myMovies.requestedList)
         }
         catch (e:Exception){}
-
         recyclerView.set3DItem(true)
         recyclerView.setAlpha(true)
         recyclerView.setInfinite(true)
