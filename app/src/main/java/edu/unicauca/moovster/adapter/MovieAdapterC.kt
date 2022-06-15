@@ -11,9 +11,19 @@ import edu.unicauca.moovster.movies.Movie
 
 class MovieAdapterC (private val moviesList: ArrayList<Movie>): RecyclerView.Adapter<MovieViewHolderCarousel>() {
 
+    private lateinit var mListener : onItemClickListener
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        mListener = listener;
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolderCarousel {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return MovieViewHolderCarousel(layoutInflater.inflate(R.layout.item_view_carousel,parent,false));
+        return MovieViewHolderCarousel(layoutInflater.inflate(R.layout.item_view_carousel,parent,false),mListener);
     }
 
     override fun onFailedToRecycleView(holder: MovieViewHolderCarousel): Boolean {
@@ -33,4 +43,6 @@ class MovieAdapterC (private val moviesList: ArrayList<Movie>): RecyclerView.Ada
         val item = moviesList[position]
         holder.render(item)
     }
+
+
 }
