@@ -54,7 +54,7 @@ class CarouselFragment(var gender: String) : Fragment(){
 
         myMovies.getMoviesByGender(listOf(gender), VolleyCallBack {
             val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
-            recyclerView.layoutManager= LinearLayoutManager(context)
+            recyclerView.layoutManager= recyclerView.getCarouselLayoutManager()
             try {
                 var adapter = MovieAdapterC(myMovies.requestedList);
                 recyclerView.adapter= adapter
@@ -64,7 +64,8 @@ class CarouselFragment(var gender: String) : Fragment(){
                         val fragmentInformation: Fragment = show_movie_info_fragment(id)
 
                         activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(edu.unicauca.moovster.R.id.containerHome,fragmentInformation)?.commit()
+                            ?.replace(edu.unicauca.moovster.R.id.containerHome,fragmentInformation)?.addToBackStack(null)
+                            ?.commit()
                     }
                 })
             }
