@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -31,6 +32,7 @@ import edu.unicauca.moovster.movies.VolleyCallBack;
  */
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
+    private  int cont=0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,21 +52,6 @@ public class show_movie_info_fragment extends Fragment {
     }
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment show_movie_info_fragment.
-     */
-    public static show_movie_info_fragment newInstance(int movie_id) {
-        show_movie_info_fragment fragment = new show_movie_info_fragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, movie_id);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
 
     @Override
@@ -77,7 +64,21 @@ public class show_movie_info_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
+        viewsButton.setText("Vista "+cont+" veces");
+        viewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // código a ejecutar cuando sea pulsado
+                cont++;
+                viewsButton.setText("Vista "+cont+" veces");
+            }
+        });
+        fillInfo(view);
 
+    }
+
+    private  void fillInfo(View view){
         Movies gesMovies = new Movies(getContext());
         try {
             gesMovies.getMovie(this.movieId, new VolleyCallBack() {
@@ -99,15 +100,11 @@ public class show_movie_info_fragment extends Fragment {
                     overview.setText(movie.getOverview());
                     Glide.with(view)
                             .load(movie.getUrlImage())
-                            .into(image);
-
-
-                }
+                            .into(image);     }
             });
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
 }
