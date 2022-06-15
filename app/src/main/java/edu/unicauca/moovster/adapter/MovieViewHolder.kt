@@ -13,8 +13,10 @@ class MovieViewHolder(view:View):RecyclerView.ViewHolder(view) {
     val movieImage = view.findViewById<ImageView>(R.id.movieImage)
     fun render(movie:Movie){
         movieTitle.text=movie.name
+        movieImage.contentDescription= movie.id.toString()
         Glide.with(itemView)
             .load(movie.urlImage)
             .into(movieImage);
     }
+
 }

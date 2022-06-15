@@ -2,9 +2,11 @@ package edu.unicauca.moovster
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -17,6 +19,7 @@ import edu.unicauca.moovster.databinding.ActivityMainBinding
 import edu.unicauca.moovster.movies.Movie
 import edu.unicauca.moovster.movies.Movies
 import edu.unicauca.moovster.movies.VolleyCallBack
+import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -45,6 +48,17 @@ class MainActivity : AppCompatActivity() {
         navView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setBackgroundColor(getResources().getColor(R.color.emotionless_purple));
+
+
+
+    }
+
+    fun peli(view: View) {
+        val id :String= view.contentDescription as String;
+        val fragmentInformation: Fragment = show_movie_info_fragment(Integer.parseInt(id))
+        this?.supportFragmentManager?.beginTransaction()
+            ?.replace(edu.unicauca.moovster.R.id.fragmentMovies,fragmentInformation)
+            ?.commit();
 
 
 

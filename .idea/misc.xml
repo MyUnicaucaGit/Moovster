@@ -23,6 +23,11 @@
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/item_view_carousel.xml" value="0.10960144927536232" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/movie_layout.xml" value="0.192481884057971" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_show__movie_list.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/movie_layout.xml" value="0.33645833333333336" />
       </map>
     </option>
   </component>
@@ -31,5 +36,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33645833333333336" />
+      </ProjectState>
+    </option>
   </component>
 </project>
