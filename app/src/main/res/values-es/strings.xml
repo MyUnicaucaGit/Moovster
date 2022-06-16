@@ -16,4 +16,5 @@
     <string name="email">Correo Electronico</string>
     <string name="password">Contraseña</string>
     <string name="required">Campo Oblgatorio</string>
+    <string name="moovsterRegister">Registro de Moovster</string>
 </resources>
