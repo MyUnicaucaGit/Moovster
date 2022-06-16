@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +79,21 @@ public class logIn extends Fragment {
             @Override
             public void onClick(View v) {
                     TextView txtEmail = view.findViewById(R.id.loginEmail);
-                    String tvEmail = txtEmail.getText().toString();
+                    TextView txtPassword = view.findViewById(R.id.loginPassword);
+                    boolean isEmailValid =Patterns.EMAIL_ADDRESS.matcher(txtEmail.getText().toString()).matches();
                     TextInputLayout email = view.findViewById(R.id.loginEmailC);
-                    email.setHelperText("true");
+                    TextInputLayout password = view.findViewById(R.id.loginPasswordC);
+                    if (isEmailValid){
+                        email.setHelperText("");
+                    }else {
+                        email.setHelperText("Ingrese un email valido.");
+                    }
 
-
+                    if (txtPassword.getText().toString().length()>0 && txtPassword.getText().toString().length()<=16){
+                        password.setHelperText("");
+                    }else {
+                        password.setHelperText(getString(R.string.required));
+                    }
             }
         });
     }
