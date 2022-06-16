@@ -16,6 +16,11 @@
     <string name="password">Password</string>
     <string name="required">Required</string>
     <string name="moovsterRegister">Moovster Register</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+    <string name="pending">Pending Movies</string>
+    <string name="Likes">Manage my Preferences</string>
+
 
 
 </resources>

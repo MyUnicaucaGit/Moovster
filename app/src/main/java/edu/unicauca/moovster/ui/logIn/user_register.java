@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,20 +73,27 @@ public class user_register extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView txtName = view.findViewById(R.id.registerName);
-                String tvName = txtName.getText().toString();
-                TextInputLayout name = view.findViewById(R.id.registerNameC);
-                name.setHelperText("true");
-
                 TextView txtEmail = view.findViewById(R.id.registerEmail);
-                String tvEmail = txtEmail.getText().toString();
-                TextInputLayout email = view.findViewById(R.id.registerEmailC);
-                email.setHelperText("true");
-
-                TextView txtPsw = view.findViewById(R.id.registerPassword);
-                String tvPsw = txtPsw.getText().toString();
-                TextInputLayout Psw = view.findViewById(R.id.registerPasswordC);
-                Psw.setHelperText("true");
+                TextView txtPassword = view.findViewById(R.id.registerPassword);
+                TextView txtName = view.findViewById(R.id.registerName);
+                boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(txtEmail.getText().toString()).matches();
+                TextInputLayout email = view.findViewById(R.id.loginEmailC);
+                TextInputLayout password = view.findViewById(R.id.loginPasswordC);
+                if (isEmailValid){
+                    email.setHelperText("");
+                }else {
+                    email.setHelperText("Ingrese un email valido.");
+                }
+                if (txtPassword.getText().toString().length()>0 && txtPassword.getText().toString().length()<=16){
+                    password.setHelperText("");
+                }else {
+                    password.setHelperText(getString(R.string.required));
+                }
+                if (txtName.getText().toString().length()>0){
+                    password.setHelperText("");
+                }else {
+                    password.setHelperText(getString(R.string.required));
+                }
             }
         });
     }
