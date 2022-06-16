@@ -68,14 +68,21 @@ public class show_movie_info_fragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 Fragment fragBack = new HomeFragment();
+                int idFrag =edu.unicauca.moovster.R.id.containerHome;
                 switch(tagForBack){
                     case "Movie_list":
                         fragBack = new Show_Movie_list();
+                        idFrag = R.id.fragmentMovies;
+
+                        break;
+                    default:
+                        idFrag=edu.unicauca.moovster.R.id.containerHome;
                         break;
                 }
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(edu.unicauca.moovster.R.id.containerHome,fragBack)
+                        .replace(idFrag,fragBack)
                         .commit();
+
             }
 
         };
