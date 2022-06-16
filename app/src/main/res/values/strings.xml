@@ -8,7 +8,13 @@
     <string name="showMovieInfoGenres">Genres:</string>
     <string name="showMovieInfoDuration">Duration:</string>
     <string name="showMovieInfoOverview">Overview:</string>
-    <string name="Register">Sing Up:</string>
-    <string name="Login">Login:</string>
+    <string name="Register">Sing Up</string>
+    <string name="Login">Login</string>
+    <string name="name_field">Name</string>
+    <string name="born_date">Born Date</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="required">Required</string>
+
 
 </resources>

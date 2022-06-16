@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/Login_Register.xml" value="0.1" />
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/activity_main.xml" value="0.22447916666666667" />
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/example.xml" value="0.14617486338797814" />
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/fragment_carousel.xml" value="0.19384057971014493" />
@@ -10,7 +11,8 @@
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/fragment_nav_bar.xml" value="0.12318840579710146" />
         <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/item_view_carousel.xml" value="0.1" />
-        <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/register_user.xml" value="0.19384057971014493" />
+        <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/login_or_register.xml" value="0.19384057971014493" />
+        <entry key="..\:/Brayan/Unicauca/SEMESTRE X/Moovster/app/src/main/res/layout/register_user.xml" value="0.33" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/card_example.xml" value="0.192481884057971" />
         <entry key="..\:/MisArchivos/SEM 10/MOVILES/Moovster/app/src/main/res/layout/example_recycler_view.xml" value="0.10190217391304347" />

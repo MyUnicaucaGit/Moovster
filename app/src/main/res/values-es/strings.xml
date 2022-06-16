@@ -9,6 +9,11 @@
     <string name="showMovieInfoGenres">Generos:</string>
     <string name="showMovieInfoDuration">Duración:</string>
     <string name="showMovieInfoOverview">Sinopsis:</string>
-    <string name="Register">Registrarse:</string>
-    <string name="Login">Iniciar Sesión:</string>
+    <string name="Register">Registrarse</string>
+    <string name="Login">Iniciar Sesión</string>
+    <string name="name_field">Nombre</string>
+    <string name="born_date">Fecha de Nacimiento</string>
+    <string name="email">Correo Electronico</string>
+    <string name="password">Contraseña</string>
+    <string name="required">Campo Oblgatorio</string>
 </resources>
