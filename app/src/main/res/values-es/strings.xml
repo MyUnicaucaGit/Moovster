@@ -9,4 +9,6 @@
     <string name="showMovieInfoGenres">Generos:</string>
     <string name="showMovieInfoDuration">Duración:</string>
     <string name="showMovieInfoOverview">Sinopsis:</string>
+    <string name="Register">Registrarse:</string>
+    <string name="Login">Iniciar Sesión:</string>
 </resources>

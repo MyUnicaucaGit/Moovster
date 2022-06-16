@@ -8,7 +8,7 @@
     <string name="showMovieInfoGenres">Genres:</string>
     <string name="showMovieInfoDuration">Duration:</string>
     <string name="showMovieInfoOverview">Overview:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Register">Sing Up:</string>
+    <string name="Login">Login:</string>
 
 </resources>
