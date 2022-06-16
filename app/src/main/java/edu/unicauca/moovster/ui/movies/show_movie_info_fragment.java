@@ -2,6 +2,7 @@ package edu.unicauca.moovster.ui.movies;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
 import edu.unicauca.moovster.movies.VolleyCallBack;
+import edu.unicauca.moovster.ui.home.HomeFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +36,7 @@ import edu.unicauca.moovster.movies.VolleyCallBack;
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
     private  int cont=0;
+    private String tagForBack="";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,14 +54,34 @@ public class show_movie_info_fragment extends Fragment {
     public show_movie_info_fragment(int movieId) {
         this.movieId=movieId;
     }
-
-
+    public show_movie_info_fragment(int movieId, String tagForBack) {
+        this.movieId=movieId;
+        this.tagForBack=tagForBack;
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Object callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Fragment fragBack = new HomeFragment();
+                switch(tagForBack){
+                    case "Movie_list":
+                        fragBack = new Show_Movie_list();
+                        break;
+                }
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(edu.unicauca.moovster.R.id.containerHome,fragBack)
+                        .commit();
+            }
+
+        };
+
+        requireActivity().getOnBackPressedDispatcher().addCallback((OnBackPressedCallback) callback);
+
         return inflater.inflate(R.layout.fragment_show_movie_info, container, false);
     }
 

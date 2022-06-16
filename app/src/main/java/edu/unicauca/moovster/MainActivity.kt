@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     fun peli(view: View) {
         val id :String= view.contentDescription as String;
-        val fragmentInformation: Fragment = show_movie_info_fragment(Integer.parseInt(id))
+        val fragmentInformation: Fragment = show_movie_info_fragment(Integer.parseInt(id),"Movie_list")
         this?.supportFragmentManager?.beginTransaction()
             ?.replace(edu.unicauca.moovster.R.id.fragmentMovies,fragmentInformation)
             ?.commit();

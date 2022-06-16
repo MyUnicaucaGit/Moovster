@@ -64,7 +64,7 @@ class CarouselFragment(var gender: String) : Fragment(){
                         val fragmentInformation: Fragment = show_movie_info_fragment(id)
 
                         activity?.supportFragmentManager?.beginTransaction()
-                            ?.replace(edu.unicauca.moovster.R.id.containerHome,fragmentInformation)?.addToBackStack(null)
+                            ?.replace(edu.unicauca.moovster.R.id.containerHome,fragmentInformation)
                             ?.commit()
                     }
                 })
