@@ -69,7 +69,7 @@ public class user_register extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "administracion", null, 1);
         SQLiteDatabase Db = admin.getWritableDatabase();
-        Button btnLogin = view.findViewById(R.id.btnSingUp);
+        Button btnLogin = view.findViewById(R.id.btnSingUpUser);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

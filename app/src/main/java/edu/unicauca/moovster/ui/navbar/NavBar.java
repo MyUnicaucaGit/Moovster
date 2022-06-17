@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import edu.unicauca.moovster.R;
-import edu.unicauca.moovster.ui.logIn.logIn;
+import edu.unicauca.moovster.ui.login.logIn;
+import edu.unicauca.moovster.ui.login.login_or_register;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,7 +78,7 @@ public class NavBar extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,new logIn())
+                        .replace(R.id.nav_host_fragment_activity_main,new login_or_register())
                         .commit();
             }
         });

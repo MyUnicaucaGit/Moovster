@@ -2,11 +2,18 @@ package edu.unicauca.moovster.ui.login;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import edu.unicauca.moovster.R;
 
@@ -62,5 +69,27 @@ public class login_or_register extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login_or_register, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Button btnRegister = view.findViewById(R.id.btnGoSingUp);
+        Button btnLogin = view.findViewById(R.id.btnGoLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main,new logIn())
+                        .commit();
+            }
+        });
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main,new user_register())
+                        .commit();
+            }
+        });
     }
 }

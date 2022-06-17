@@ -1,4 +1,4 @@
-package edu.unicauca.moovster.ui.logIn;
+package edu.unicauca.moovster.ui.login;
 
 import android.os.Bundle;
 
