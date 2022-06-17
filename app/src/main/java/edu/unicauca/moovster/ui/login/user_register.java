@@ -1,5 +1,6 @@
 package edu.unicauca.moovster.ui.login;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -78,6 +80,7 @@ public class user_register extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Boolean validation = true;
                 TextView txtEmail = view.findViewById(R.id.registerEmail);
                 TextView txtPassword = view.findViewById(R.id.registerPassword);
                 TextView txtName = view.findViewById(R.id.registerName);
@@ -89,16 +92,40 @@ public class user_register extends Fragment {
                     email.setHelperText("");
                 }else {
                     email.setHelperText("Ingrese un email valido.");
+                    validation = false;
                 }
                 if (txtPassword.getText().toString().length()>0 && txtPassword.getText().toString().length()<=16){
                     password.setHelperText("");
                 }else {
                     password.setHelperText(getString(R.string.required));
+                    validation = false;
                 }
                 if (txtName.getText().toString().length()>0){
                     name.setHelperText("");
                 }else {
                     password.setHelperText(getString(R.string.required));
+                    validation = false;
+                }
+
+                if (validation == true) {
+                    ContentValues registroUser = new ContentValues();
+                    registroUser.put("name",txtName.getText().toString());
+                    registroUser.put("email",txtEmail.getText().toString());
+                    registroUser.put("password",txtPassword.getText().toString());
+
+                    Db.insert("User", null,registroUser);
+                    Db.close();
+
+                    txtName.setText("");
+                    txtEmail.setText("");
+                    txtPassword.setText("");
+
+                    Toast.makeText(getContext(), "Registro Exitoso, ahora puede iniciar sesion", Toast.LENGTH_SHORT).show();
+
+
+                }
+                else{
+                    Toast.makeText(getContext(), "Por favor ingresa correctamente los datos requeridos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
