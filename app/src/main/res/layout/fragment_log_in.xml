@@ -77,7 +77,7 @@
                 app:counterTextColor="@color/alice_purple"
                 app:errorEnabled="true"
                 app:helperText="@string/required"
-                app:helperTextTextColor="@color/icons_color"
+                app:helperTextTextColor="?attr/colorError"
                 app:hintTextColor="@color/letter_pink"
                 app:passwordToggleEnabled="true">
 

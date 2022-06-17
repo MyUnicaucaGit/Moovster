@@ -26,7 +26,7 @@
             android:src="@drawable/moovster">
         </ImageView>
         <Button
-            android:id="@+id/btnSingUp"
+            android:id="@+id/btnGoSingUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/base_purple"
@@ -38,7 +38,7 @@
             app:iconSize="30dp"
             app:iconTint="@color/icons_color" />
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnGoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/base_purple"
