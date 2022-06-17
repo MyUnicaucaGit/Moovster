@@ -26,6 +26,7 @@ import org.json.JSONTokener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var userLogged:Boolean = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,5 +64,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+    fun isUserLogged(): Boolean {
+        return this.userLogged;
+    }
 }
