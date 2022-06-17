@@ -82,8 +82,9 @@ public class user_register extends Fragment {
                 TextView txtPassword = view.findViewById(R.id.registerPassword);
                 TextView txtName = view.findViewById(R.id.registerName);
                 boolean isEmailValid = Patterns.EMAIL_ADDRESS.matcher(txtEmail.getText().toString()).matches();
-                TextInputLayout email = view.findViewById(R.id.loginEmailC);
-                TextInputLayout password = view.findViewById(R.id.loginPasswordC);
+                TextInputLayout name = view.findViewById(R.id.registerNameC);
+                TextInputLayout email = view.findViewById(R.id.registerEmailC);
+                TextInputLayout password = view.findViewById(R.id.registerPasswordC);
                 if (isEmailValid){
                     email.setHelperText("");
                 }else {
@@ -95,7 +96,7 @@ public class user_register extends Fragment {
                     password.setHelperText(getString(R.string.required));
                 }
                 if (txtName.getText().toString().length()>0){
-                    password.setHelperText("");
+                    name.setHelperText("");
                 }else {
                     password.setHelperText(getString(R.string.required));
                 }
