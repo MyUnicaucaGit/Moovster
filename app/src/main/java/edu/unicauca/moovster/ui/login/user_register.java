@@ -74,7 +74,7 @@ public class user_register extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "administracion", null, 1);
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
         SQLiteDatabase Db = admin.getWritableDatabase();
         Button btnLogin = view.findViewById(R.id.btnSingUpUser);
         btnLogin.setOnClickListener(new View.OnClickListener() {
