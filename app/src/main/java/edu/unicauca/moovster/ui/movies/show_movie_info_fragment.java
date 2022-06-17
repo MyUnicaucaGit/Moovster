@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.unicauca.moovster.R;
@@ -96,6 +99,36 @@ public class show_movie_info_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
+        MaterialButton star1=view.findViewById(R.id.infoMovieBtnStar1);
+        MaterialButton star2=view.findViewById(R.id.infoMovieBtnStar2);
+        MaterialButton star3=view.findViewById(R.id.infoMovieBtnStar3);
+        MaterialButton star4=view.findViewById(R.id.infoMovieBtnStar4);
+        MaterialButton star5=view.findViewById(R.id.infoMovieBtnStar5);
+        star1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStars(1);
+            }});
+        star2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStars(2);
+            }});
+        star3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStars(3);
+            }});
+        star4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStars(4);
+            }});
+        star5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStars(5);
+            }});
         viewsButton.setText("Vista "+cont+" veces");
         viewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +139,23 @@ public class show_movie_info_fragment extends Fragment {
             }
         });
         fillInfo(view);
+
+    }
+
+    private void changeStars(int star){
+        ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
+        stars.add(getView().findViewById(R.id.infoMovieBtnStar1));
+        stars.add(getView().findViewById(R.id.infoMovieBtnStar2));
+        stars.add(getView().findViewById(R.id.infoMovieBtnStar3));
+        stars.add(getView().findViewById(R.id.infoMovieBtnStar4));
+        stars.add(getView().findViewById(R.id.infoMovieBtnStar5));
+
+        for (int i = 0; i < star; i++) {
+            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.star));
+        }
+        for (int i = star; i < 5; i++) {
+            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.starempty));
+        }
 
     }
 
