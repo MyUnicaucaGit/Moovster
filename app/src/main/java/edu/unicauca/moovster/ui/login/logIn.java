@@ -2,6 +2,7 @@ package edu.unicauca.moovster.ui.login;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import edu.unicauca.moovster.R;
+import edu.unicauca.moovster.ui.home.HomeFragment;
+import edu.unicauca.moovster.ui.movies.Show_Movie_list;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,7 +71,7 @@ public class logIn extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_in, container, false);
+         return inflater.inflate(R.layout.fragment_log_in, container, false);
     }
 
     @Override

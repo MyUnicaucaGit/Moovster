@@ -79,7 +79,7 @@ public class login_or_register extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,new logIn())
+                        .replace(R.id.nav_host_fragment_activity_main,new logIn()).addToBackStack(null)
                         .commit();
             }
         });
@@ -87,7 +87,7 @@ public class login_or_register extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,new user_register())
+                        .replace(R.id.nav_host_fragment_activity_main,new user_register()).addToBackStack(null)
                         .commit();
             }
         });
