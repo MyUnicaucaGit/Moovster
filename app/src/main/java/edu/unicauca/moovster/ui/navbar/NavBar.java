@@ -80,7 +80,7 @@ public class NavBar extends Fragment {
                 MainActivity  d= (MainActivity) getActivity();
                 boolean asd =d.isUserLogged();
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerHome,new logIn())
+                        .replace(R.id.nav_host_fragment_activity_main,new logIn())
                         .commit();
             }
         });
