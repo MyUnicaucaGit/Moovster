@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
         return this.userLogged;
     }
 
+    fun setUserLogged(isLogged:Boolean) {
+        this.userLogged=isLogged
+    }
+
     fun getDB(): SQLiteDatabase {
         return this.Db;
     }
