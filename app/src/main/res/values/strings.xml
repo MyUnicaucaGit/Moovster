@@ -20,8 +20,12 @@
     <string name="series">Series</string>
     <string name="pending">Pending Movies</string>
     <string name="Likes">Manage my Preferences</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="emailHelper">Enter a valid email address</string>
+    <string name="existingUser">there is already a registered user with that email address</string>
+    <string name="registerSuccesfull">Registration Successful, now you can log in.</string>
+    <string name="dataWarning">Please enter the required data correctly</string>
+    <string name="loginSuccesfull">You are successfully logged in</string>
+    <string name="loginWarning">There is no user registered with this credentials.</string>
     <string name="not_available_functionality">Just user logged can use this function</string>
 
 

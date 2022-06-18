@@ -21,5 +21,11 @@
     <string name="series">Series</string>
     <string name="pending">Peliculas Pendientes</string>
     <string name="Likes">Gestionar mis Gustos</string>
+    <string name="emailHelper">Ingrese un email valido</string>
+    <string name="existingUser">ya existe un usuario registrado con ese email</string>
+    <string name="registerSuccesfull">Registro Exitoso, ahora puede iniciar sesion</string>
+    <string name="dataWarning">Por favor ingresa correctamente los datos requeridos</string>
+    <string name="loginSuccesfull">Ha iniciado sesion crrectamente</string>
+    <string name="loginWarning">No existe un usuario registrado con esas credenciales</string>
     <string name="not_available_functionality">Solo usuarios registrados puede acceder a esta funcionalidad</string>
 </resources>

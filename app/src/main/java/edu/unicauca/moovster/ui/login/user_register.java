@@ -100,7 +100,7 @@ public class user_register extends Fragment {
                 if (isEmailValid){
                     email.setHelperText("");
                 }else {
-                    email.setHelperText("Ingrese un email valido.");
+                    email.setHelperText(getString(R.string.emailHelper));
                     validation = false;
                 }
                 if (txtPassword.getText().toString().length()>0 && txtPassword.getText().toString().length()<=16){
@@ -115,35 +115,31 @@ public class user_register extends Fragment {
                     password.setHelperText(getString(R.string.required));
                     validation = false;
                 }
-
-                Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"'",null);
-
-                if (fila.moveToFirst()){
-                    Toast.makeText(getContext(),"ya existe un usuario registrado con ese email",Toast.LENGTH_SHORT).show();
-                    Db.close();
-                }
-                else {
                     if (validation == true) {
-                        ContentValues registroUser = new ContentValues();
-                        registroUser.put("name", txtName.getText().toString());
-                        registroUser.put("email", txtEmail.getText().toString());
-                        registroUser.put("password", txtPassword.getText().toString());
-                        MainActivity activity = (MainActivity) getActivity();
-                        Db.insert("User", null, registroUser);
-                        Db.close();
+                        Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"'",null);
+                        if (fila.moveToFirst()) {
+                            Toast.makeText(getContext(),getString(R.string.existingUser),Toast.LENGTH_SHORT).show();
+                            Db.close();
+                        } else {
+                            ContentValues registroUser = new ContentValues();
+                            registroUser.put("name", txtName.getText().toString());
+                            registroUser.put("email", txtEmail.getText().toString());
+                            registroUser.put("password", txtPassword.getText().toString());
+                            MainActivity activity = (MainActivity) getActivity();
+                            Db.insert("User", null, registroUser);
+                            Db.close();
 
-                        txtName.setText("");
-                        txtEmail.setText("");
-                        txtPassword.setText("");
+                            txtName.setText("");
+                            txtEmail.setText("");
+                            txtPassword.setText("");
 
-                        Toast.makeText(getContext(), "Registro Exitoso, ahora puede iniciar sesion", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getContext(), getString(R.string.loginSuccesfull), Toast.LENGTH_SHORT).show();
+                        }
 
                     } else {
-                        Toast.makeText(getContext(), "Por favor ingresa correctamente los datos requeridos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.dataWarning), Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
         });
     }
 }
