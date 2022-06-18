@@ -25,17 +25,13 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
 import edu.unicauca.moovster.movies.VolleyCallBack;
 import edu.unicauca.moovster.ui.home.HomeFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link show_movie_info_fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
     private  int cont=0;
@@ -98,7 +94,9 @@ public class show_movie_info_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MainActivity main = (MainActivity) getActivity();
         Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
+        MaterialButton favButton=view.findViewById(R.id.infoMovieBtnFav);
         MaterialButton star1=view.findViewById(R.id.infoMovieBtnStar1);
         MaterialButton star2=view.findViewById(R.id.infoMovieBtnStar2);
         MaterialButton star3=view.findViewById(R.id.infoMovieBtnStar3);
@@ -134,29 +132,56 @@ public class show_movie_info_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // código a ejecutar cuando sea pulsado
-                cont++;
-                viewsButton.setText("Vista "+cont+" veces");
+
+                if (main.isUserLogged()){
+                    cont++;
+                    viewsButton.setText("Vista "+cont+" veces");
+                }else{
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
+            }
+        });
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // código a ejecutar cuando sea pulsado
+
+                if (main.isUserLogged()){
+                    favButton.setText("En favoritas");
+                }else{
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
         fillInfo(view);
-
     }
 
     private void changeStars(int star){
-        ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar1));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar2));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar3));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar4));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar5));
+        MainActivity main = (MainActivity) getActivity();
+        if (main.isUserLogged()){
 
-        for (int i = 0; i < star; i++) {
-            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.star));
-        }
-        for (int i = star; i < 5; i++) {
-            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.starempty));
-        }
+            ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar1));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar2));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar3));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar4));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar5));
 
+            for (int i = 0; i < star; i++) {
+                stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.star));
+            }
+            for (int i = star; i < 5; i++) {
+                stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.starempty));
+            }
+
+        }else{
+            Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
     }
 
     private  void fillInfo(View view){

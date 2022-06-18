@@ -27,4 +27,5 @@
     <string name="dataWarning">Por favor ingresa correctamente los datos requeridos</string>
     <string name="loginSuccesfull">Ha iniciado sesion crrectamente</string>
     <string name="loginWarning">No existe un usuario registrado con esas credenciales</string>
+    <string name="not_available_functionality">Solo usuarios registrados puede acceder a esta funcionalidad</string>
 </resources>

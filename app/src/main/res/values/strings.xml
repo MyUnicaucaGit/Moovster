@@ -26,5 +26,7 @@
     <string name="dataWarning">Please enter the required data correctly</string>
     <string name="loginSuccesfull">You are successfully logged in</string>
     <string name="loginWarning">There is no user registered with this credentials.</string>
+    <string name="not_available_functionality">Just user logged can use this function</string>
+
 
 </resources>
