@@ -19,6 +19,7 @@ import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var userLogged:Boolean = false;
+    private var userEmail:String ="";
     private lateinit var admin:AdminsSQLHelper;
     private lateinit var Db: SQLiteDatabase;
 
@@ -63,8 +64,13 @@ class MainActivity : AppCompatActivity() {
         return this.userLogged;
     }
 
-    fun setUserLogged(isLogged:Boolean) {
+    fun setUserLogged(isLogged:Boolean, userE:String) {
         this.userLogged=isLogged
+        this.userEmail=userE;
+    }
+
+    fun getUserEmail():String{
+        return this.userEmail;
     }
 
     fun getDB(): SQLiteDatabase {
