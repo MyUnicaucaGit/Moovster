@@ -13,8 +13,11 @@ import android.widget.Button;
 
 import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
+import edu.unicauca.moovster.ui.home.HomeFragment;
 import edu.unicauca.moovster.ui.login.logIn;
 import edu.unicauca.moovster.ui.login.login_or_register;
+import edu.unicauca.moovster.ui.profile.ProfileFF;
+import edu.unicauca.moovster.ui.profile.ProfileFragment;
 
 
 /**
@@ -80,10 +83,16 @@ public class NavBar extends Fragment {
             @Override
             public void onClick(View v) {
                 MainActivity  d= (MainActivity) getActivity();
-                boolean asd =d.isUserLogged();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
-                        .commit();
+                if(d.isUserLogged()){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_host_fragment_activity_main,new ProfileFF()).addToBackStack(null)
+                            .commit();
+                }else{
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
+                            .commit();
+                }
+
             }
         });
 
