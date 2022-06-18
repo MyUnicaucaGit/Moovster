@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.db.AdminsSQLHelper;
 
@@ -74,8 +75,6 @@ public class user_register extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
-        SQLiteDatabase Db = admin.getWritableDatabase();
         Button btnLogin = view.findViewById(R.id.btnSingUpUser);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,9 +111,9 @@ public class user_register extends Fragment {
                     registroUser.put("name",txtName.getText().toString());
                     registroUser.put("email",txtEmail.getText().toString());
                     registroUser.put("password",txtPassword.getText().toString());
-
-                    Db.insert("User", null,registroUser);
-                    Db.close();
+                    MainActivity activity = (MainActivity) getActivity();
+                    activity.getDB().insert("User", null,registroUser);
+                    activity.getDB().close();
 
                     txtName.setText("");
                     txtEmail.setText("");

@@ -1,32 +1,26 @@
 package edu.unicauca.moovster
 
 import android.content.res.ColorStateList
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import edu.unicauca.moovster.databinding.ActivityMainBinding
-import edu.unicauca.moovster.movies.Movie
-import edu.unicauca.moovster.movies.Movies
-import edu.unicauca.moovster.movies.VolleyCallBack
+import edu.unicauca.moovster.db.AdminsSQLHelper
 import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
-import org.json.JSONArray
-import org.json.JSONObject
-import org.json.JSONTokener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var userLogged:Boolean = false;
+    private lateinit var admin:AdminsSQLHelper;
+    private lateinit var Db: SQLiteDatabase;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +29,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide();
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        admin = AdminsSQLHelper(this, "dbMoovster", null, 1)
+        Db = admin.writableDatabase
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -61,10 +58,12 @@ class MainActivity : AppCompatActivity() {
             ?.replace(edu.unicauca.moovster.R.id.fragmentMovies,fragmentInformation)
             ?.commit();
 
-
-
     }
     fun isUserLogged(): Boolean {
         return this.userLogged;
+    }
+
+    fun getDB(): SQLiteDatabase {
+        return this.Db;
     }
 }

@@ -1,7 +1,6 @@
 package edu.unicauca.moovster.ui.profile
 
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import edu.unicauca.moovster.MainActivity
 import edu.unicauca.moovster.R
 import edu.unicauca.moovster.databinding.FragmentProfileBinding
-import edu.unicauca.moovster.db.AdminsSQLHelper
 
 class ProfileFragment : Fragment() {
 
@@ -42,13 +41,10 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
         val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
-
-        super.onViewCreated(view, savedInstanceState)
-        val admin : AdminsSQLHelper = AdminsSQLHelper(context, "dbMoovster", null, 1)
-        val Db: SQLiteDatabase = admin.writableDatabase
+        val activity: MainActivity = getActivity() as MainActivity
 
         var email:String="pepe@pruebas.com"
 
@@ -56,15 +52,15 @@ class ProfileFragment : Fragment() {
             Toast.makeText(context,"Redirigir a iniciar sesion",Toast.LENGTH_SHORT).show()
         }
         else{
-            val fila:Cursor = Db.rawQuery("select name, email from User where email = '"+email+"'",null);
+            val fila:Cursor = activity.getDB().rawQuery("select name, email from User where email = '"+email+"'",null);
             if (fila.moveToFirst()){
                 txtName.setText(fila.getString(0))
                 txtEmail.setText(fila.getString(1))
-                Db.close()
+                activity.getDB().close()
             }
             else{
                 Toast.makeText(context,"No hay usuario",Toast.LENGTH_SHORT).show()
-                Db.close()
+                activity.getDB().close()
             }
         }
 
