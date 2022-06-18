@@ -28,6 +28,11 @@
     <string name="loginWarning">There is no user registered with this credentials.</string>
     <string name="not_available_functionality">Just user logged can use this function</string>
     <string name="SearchHint">Search...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Search_title_text">Search with filters</string>
+    <string name="Genres">Genres</string>
+    <string name="Year">Year</string>
 
 
 </resources>

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.adapter.MovieAdapter;
@@ -30,6 +31,8 @@ import edu.unicauca.moovster.movies.VolleyCallBack;
  */
 public class Show_Movie_list extends Fragment {
     private String query="";
+    private int year=0;
+    private List<String> genres;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,8 +47,11 @@ public class Show_Movie_list extends Fragment {
         // Required empty public constructor
     }
     public Show_Movie_list(String query) {
-        // Required empty public constructor
         this.query=query;
+    }
+    public Show_Movie_list(List<String> genres,int year) {
+        this.genres=genres;
+        this.year=year;
     }
 
     /**
@@ -87,6 +93,23 @@ public class Show_Movie_list extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Movies myMovies = new Movies(getContext());
+
+        if (this.year!=0){
+
+            try {
+                myMovies.getMoviesByGenderAndYear(this.genres,this.year,new VolleyCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                        recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
 
         if (this.query.equalsIgnoreCase("")){
 

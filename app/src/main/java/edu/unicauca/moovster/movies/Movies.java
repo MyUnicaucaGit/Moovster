@@ -104,6 +104,23 @@ public class Movies {
 
     }
 
+    public void getMoviesByGenderAndYear(List<String> genres, int year, VolleyCallBack callBack) throws JSONException {
+        String par="";
+        for (int i = 0; i < genres.size(); i++) {
+            for (int j = 0; j < genresList.length(); j++) {
+                JSONObject json = genresList.getJSONObject(j);
+                if (genres.get(i).equalsIgnoreCase(json.getString("name"))){
+                    par=par+"with_genres="+json.getString("id")+"&";
+                }
+            }
+        }
+        par=par+"primary_release_year="+year;
+
+        StringRequest req = query(par, callBack);
+        queue.add(req);
+
+    }
+
 
     public void getMoviesByGender(List<String> genres, VolleyCallBack callBack) throws JSONException {
         String par="";

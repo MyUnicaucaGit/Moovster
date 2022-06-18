@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ui.movies.SearchFilters">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Search_title_text"
+                android:textColor="@color/letter_white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/Genres"
+                android:textColor="@color/letter_white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Acción"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Aventura"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch3"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Animación"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch4"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Comedia"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch5"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Crimen"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch6"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Documental"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch7"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Drama"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch8"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Familia"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch9"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Fantasía"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Switch
+                    android:id="@+id/switch10"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Historia"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch11"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Terror"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch12"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Música"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch13"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Misterio"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch14"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Ciencia ficción"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch15"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Película de TV"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch16"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Suspense"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch17"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Bélica"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/switch18"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="@color/letter_pink"
+                    android:text="Western"
+                    android:textColor="@color/letter_white"
+                    android:textColorHint="@color/salmon"
+                    android:textColorLink="@color/salmon"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/Year"
+                android:textColor="@color/letter_white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="60"
+                android:progress="60" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|top">
+
+            <TextView
+                android:id="@+id/txtYearFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="2022"
+                android:textColor="@color/letter_white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnSearchFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/search_go" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+</FrameLayout>

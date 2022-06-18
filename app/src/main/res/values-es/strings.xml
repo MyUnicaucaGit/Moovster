@@ -29,4 +29,7 @@
     <string name="loginWarning">No existe un usuario registrado con esas credenciales</string>
     <string name="not_available_functionality">Solo usuarios registrados puede acceder a esta funcionalidad</string>
     <string name="SearchHint">Buscar...</string>
+    <string name="Search_title_text">Busqueda con filtros</string>
+    <string name="Genres">Generos</string>
+    <string name="Year">Años</string>
 </resources>
