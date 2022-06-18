@@ -1,5 +1,7 @@
 package edu.unicauca.moovster.ui.navbar;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.ui.home.HomeFragment;
 import edu.unicauca.moovster.ui.login.logIn;
 import edu.unicauca.moovster.ui.login.login_or_register;
+import edu.unicauca.moovster.ui.movies.Show_Movie_list;
 import edu.unicauca.moovster.ui.profile.ProfileFF;
 import edu.unicauca.moovster.ui.profile.ProfileFragment;
 
@@ -79,6 +84,7 @@ public class NavBar extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnUser = view.findViewById(R.id.btnNBUser);
+        SearchView search  = view.findViewById(R.id.searchViewMovies);
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +99,20 @@ public class NavBar extends Fragment {
                             .commit();
                 }
 
+            }
+        });
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main,new Show_Movie_list(query))
+                        .commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
 

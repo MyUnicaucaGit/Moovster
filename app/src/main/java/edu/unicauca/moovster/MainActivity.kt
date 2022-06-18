@@ -1,10 +1,13 @@
 package edu.unicauca.moovster
 
+import android.app.SearchManager
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -48,15 +51,13 @@ class MainActivity : AppCompatActivity() {
         navView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setBackgroundColor(getResources().getColor(R.color.emotionless_purple));
 
-
-
-    }
+        }
 
     fun peli(view: View) {
         val id :String= view.contentDescription as String;
         val fragmentInformation: Fragment = show_movie_info_fragment(Integer.parseInt(id),"Movie_list")
         this?.supportFragmentManager?.beginTransaction()
-            ?.replace(edu.unicauca.moovster.R.id.fragmentMovies,fragmentInformation)
+            ?.replace(edu.unicauca.moovster.R.id.nav_host_fragment_activity_main,fragmentInformation)
             ?.commit();
 
     }

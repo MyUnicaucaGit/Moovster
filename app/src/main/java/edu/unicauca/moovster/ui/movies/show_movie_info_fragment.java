@@ -71,7 +71,7 @@ public class show_movie_info_fragment extends Fragment {
                 switch(tagForBack){
                     case "Movie_list":
                         fragBack = new Show_Movie_list();
-                        idFrag = R.id.fragmentMovies;
+                        idFrag = R.id.nav_host_fragment_activity_main;
 
                         break;
                     default:

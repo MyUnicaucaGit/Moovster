@@ -48,6 +48,34 @@ public class Movies {
         //return  JSONtoMovies(movies);
     }
 
+    public void searchMovie(String query, final VolleyCallBack callBack) throws JSONException {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/search/movie?query="+query+"&api_key=f1961361867f54b54c406ca37edb2ed9&language=es",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject myJson = new JSONObject(response);
+                            JSONArray movies = myJson.getJSONArray("results");
+                            requestedList = JSONtoMovies(movies);
+                            callBack.onSuccess();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("fallo");
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        //return  JSONtoMovies(movies);
+
+    }
+
+
     public void getMovie(int id, final VolleyCallBack callBack) throws JSONException {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://api.themoviedb.org/3/movie/"+id+"?api_key=f1961361867f54b54c406ca37edb2ed9&language=es",
                 new Response.Listener<String>() {
@@ -163,9 +191,6 @@ public class Movies {
                 }
             }
         }
-
-
-
         return res;
     }
 }

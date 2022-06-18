@@ -34,11 +34,15 @@
             app:iconTint="@color/icons_color" />
 
         <SearchView
+            android:id="@+id/searchViewMovies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/icons_color"
-            android:inputType="text" />
+            android:commitIcon="@drawable/add"
+            android:iconifiedByDefault="false"
+            android:imeOptions="actionGo"
+            android:queryHint="@string/SearchHint" />
 
         <Button
             android:id="@+id/btnNBUser"
