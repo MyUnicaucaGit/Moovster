@@ -18,7 +18,7 @@ import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var userLogged:Boolean = true;
+    private var userLogged:Boolean = false;
     private lateinit var admin:AdminsSQLHelper;
     private lateinit var Db: SQLiteDatabase;
 

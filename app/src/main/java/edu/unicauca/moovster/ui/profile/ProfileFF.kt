@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import edu.unicauca.moovster.MainActivity
 import edu.unicauca.moovster.R
+import edu.unicauca.moovster.ui.home.HomeFragment
+import edu.unicauca.moovster.ui.login.login_or_register
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +49,11 @@ class ProfileFF : Fragment() {
         val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
         val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
         val activity: MainActivity = getActivity() as MainActivity
+        if (!activity.isUserLogged()){
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.nav_host_fragment_activity_main, login_or_register())
+                ?.commit()
+        }
         /***
 
         var email:String="pepe@pruebas.com"
