@@ -21,4 +21,5 @@
     <string name="series">Series</string>
     <string name="pending">Peliculas Pendientes</string>
     <string name="Likes">Gestionar mis Gustos</string>
+    <string name="not_available_functionality">Solo usuarios registrados puede acceder a esta funcionalidad</string>
 </resources>

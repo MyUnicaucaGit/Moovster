@@ -32,11 +32,6 @@ import edu.unicauca.moovster.movies.Movies;
 import edu.unicauca.moovster.movies.VolleyCallBack;
 import edu.unicauca.moovster.ui.home.HomeFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link show_movie_info_fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
     private  int cont=0;
@@ -101,6 +96,7 @@ public class show_movie_info_fragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         MainActivity main = (MainActivity) getActivity();
         Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
+        MaterialButton favButton=view.findViewById(R.id.infoMovieBtnFav);
         MaterialButton star1=view.findViewById(R.id.infoMovieBtnStar1);
         MaterialButton star2=view.findViewById(R.id.infoMovieBtnStar2);
         MaterialButton star3=view.findViewById(R.id.infoMovieBtnStar3);
@@ -141,14 +137,26 @@ public class show_movie_info_fragment extends Fragment {
                     cont++;
                     viewsButton.setText("Vista "+cont+" veces");
                 }else{
-                    Toast toast = Toast.makeText(getContext(), "No puedes acceder a esta funcionalidad si no estas registrado.", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
                     toast.show();
                 }
 
             }
         });
-        fillInfo(view);
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // código a ejecutar cuando sea pulsado
 
+                if (main.isUserLogged()){
+                    favButton.setText("En favoritas");
+                }else{
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
+        fillInfo(view);
     }
 
     private void changeStars(int star){
@@ -170,7 +178,7 @@ public class show_movie_info_fragment extends Fragment {
             }
 
         }else{
-            Toast toast = Toast.makeText(getContext(), "No puedes acceder a esta funcionalidad si no estas registrado.", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
             toast.show();
 
         }
