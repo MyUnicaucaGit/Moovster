@@ -25,6 +25,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
@@ -98,6 +99,7 @@ public class show_movie_info_fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        MainActivity main = (MainActivity) getActivity();
         Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
         MaterialButton star1=view.findViewById(R.id.infoMovieBtnStar1);
         MaterialButton star2=view.findViewById(R.id.infoMovieBtnStar2);
@@ -134,8 +136,15 @@ public class show_movie_info_fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // código a ejecutar cuando sea pulsado
-                cont++;
-                viewsButton.setText("Vista "+cont+" veces");
+
+                if (main.isUserLogged()){
+                    cont++;
+                    viewsButton.setText("Vista "+cont+" veces");
+                }else{
+                    Toast toast = Toast.makeText(getContext(), "No puedes acceder a esta funcionalidad si no estas registrado.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
             }
         });
         fillInfo(view);
@@ -143,20 +152,28 @@ public class show_movie_info_fragment extends Fragment {
     }
 
     private void changeStars(int star){
-        ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar1));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar2));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar3));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar4));
-        stars.add(getView().findViewById(R.id.infoMovieBtnStar5));
+        MainActivity main = (MainActivity) getActivity();
+        if (main.isUserLogged()){
 
-        for (int i = 0; i < star; i++) {
-            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.star));
-        }
-        for (int i = star; i < 5; i++) {
-            stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.starempty));
-        }
+            ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar1));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar2));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar3));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar4));
+            stars.add(getView().findViewById(R.id.infoMovieBtnStar5));
 
+            for (int i = 0; i < star; i++) {
+                stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.star));
+            }
+            for (int i = star; i < 5; i++) {
+                stars.get(i).setIcon(ContextCompat.getDrawable(getContext(),R.drawable.starempty));
+            }
+
+        }else{
+            Toast toast = Toast.makeText(getContext(), "No puedes acceder a esta funcionalidad si no estas registrado.", Toast.LENGTH_SHORT);
+            toast.show();
+
+        }
     }
 
     private  void fillInfo(View view){
