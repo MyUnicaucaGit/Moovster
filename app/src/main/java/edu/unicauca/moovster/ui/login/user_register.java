@@ -1,6 +1,7 @@
 package edu.unicauca.moovster.ui.login;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -24,6 +25,8 @@ import edu.unicauca.moovster.db.AdminsSQLHelper;
 
 
 public class user_register extends Fragment {
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +76,11 @@ public class user_register extends Fragment {
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnLogin = view.findViewById(R.id.btnSingUpUser);
@@ -80,6 +88,8 @@ public class user_register extends Fragment {
             @Override
             public void onClick(View v) {
                 Boolean validation = true;
+                AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+                SQLiteDatabase Db = admin.getWritableDatabase();
                 TextView txtEmail = view.findViewById(R.id.registerEmail);
                 TextView txtPassword = view.findViewById(R.id.registerPassword);
                 TextView txtName = view.findViewById(R.id.registerName);
@@ -106,25 +116,32 @@ public class user_register extends Fragment {
                     validation = false;
                 }
 
-                if (validation == true) {
-                    ContentValues registroUser = new ContentValues();
-                    registroUser.put("name",txtName.getText().toString());
-                    registroUser.put("email",txtEmail.getText().toString());
-                    registroUser.put("password",txtPassword.getText().toString());
-                    MainActivity activity = (MainActivity) getActivity();
-                    activity.getDB().insert("User", null,registroUser);
-                    activity.getDB().close();
+                Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"'",null);
 
-                    txtName.setText("");
-                    txtEmail.setText("");
-                    txtPassword.setText("");
-
-                    Toast.makeText(getContext(), "Registro Exitoso, ahora puede iniciar sesion", Toast.LENGTH_SHORT).show();
-
-
+                if (fila.moveToFirst()){
+                    Toast.makeText(getContext(),"ya existe un usuario registrado con ese email",Toast.LENGTH_SHORT).show();
+                    Db.close();
                 }
-                else{
-                    Toast.makeText(getContext(), "Por favor ingresa correctamente los datos requeridos", Toast.LENGTH_SHORT).show();
+                else {
+                    if (validation == true) {
+                        ContentValues registroUser = new ContentValues();
+                        registroUser.put("name", txtName.getText().toString());
+                        registroUser.put("email", txtEmail.getText().toString());
+                        registroUser.put("password", txtPassword.getText().toString());
+                        MainActivity activity = (MainActivity) getActivity();
+                        Db.insert("User", null, registroUser);
+                        Db.close();
+
+                        txtName.setText("");
+                        txtEmail.setText("");
+                        txtPassword.setText("");
+
+                        Toast.makeText(getContext(), "Registro Exitoso, ahora puede iniciar sesion", Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        Toast.makeText(getContext(), "Por favor ingresa correctamente los datos requeridos", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
