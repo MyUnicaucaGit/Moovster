@@ -1,5 +1,7 @@
 package edu.unicauca.moovster.ui.movies;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -7,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +31,18 @@ import java.util.Calendar;
 
 import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
+import edu.unicauca.moovster.db.AdminsSQLHelper;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
 import edu.unicauca.moovster.movies.VolleyCallBack;
 import edu.unicauca.moovster.ui.home.HomeFragment;
+import edu.unicauca.moovster.ui.profile.ProfileFragment;
 
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
     private  int cont=0;
     private String tagForBack="";
+    private String email ="";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +69,8 @@ public class show_movie_info_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainActivity main = (MainActivity) getActivity();
+        this.email=main.getUserEmail();
         // Inflate the layout for this fragment
         Object callback = new OnBackPressedCallback(true) {
             @Override
@@ -211,6 +220,19 @@ public class show_movie_info_fragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void veryUser(){
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+        SQLiteDatabase Db = admin.getWritableDatabase();
+        Cursor fila = Db.rawQuery("select * from Movies where user_email = '"+this.email+"' and movie_id = "+this.movieId,null);
+        if (fila.moveToFirst()) {
+            Db.close();
+        } else {
+
+            Db.close();
+        }
+
     }
 
 }
