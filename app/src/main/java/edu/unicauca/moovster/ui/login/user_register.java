@@ -137,7 +137,7 @@ public class user_register extends Fragment {
                             txtEmail.setText("");
                             txtPassword.setText("");
 
-                            Toast.makeText(getContext(), getString(R.string.loginSuccesfull), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.registerSuccesfull), Toast.LENGTH_SHORT).show();
 
                             FragmentManager fragmentManager = activity.getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

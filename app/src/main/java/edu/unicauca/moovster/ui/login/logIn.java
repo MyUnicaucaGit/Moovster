@@ -1,5 +1,6 @@
 package edu.unicauca.moovster.ui.login;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -116,7 +117,13 @@ public class logIn extends Fragment {
                 if (validation == true) {
                     Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"' and password = "+txtPassword.getText().toString(),null);
                     if (fila.moveToFirst()) {
+
                         activity.setUserLogged(true, fila.getString(1));
+                        ContentValues registroUser = new ContentValues();
+                        registroUser.put("user_email", txtEmail.getText().toString());
+                        registroUser.put("isLogged", "true");
+                        Db.insert("UserLogged", null, registroUser);
+
                         Toast.makeText(getContext(),getString(R.string.loginSuccesfull),Toast.LENGTH_SHORT).show();
                         Db.close();
                         FragmentManager fragmentManager = activity.getSupportFragmentManager();
