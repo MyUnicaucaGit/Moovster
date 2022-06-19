@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SeekBar
+import android.widget.Switch
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import edu.unicauca.moovster.R
@@ -45,7 +46,28 @@ class SearchFilters : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val yearSearch:SeekBar=view.findViewById(R.id.seekBar);
         val txtYear: TextView=view.findViewById(R.id.txtYearFilter)
+        val filterYar:Switch= view.findViewById(R.id.switchYear)
         val searchButton: Button=view.findViewById(R.id.btnSearchFilter)
+        val switchList:ArrayList<Switch> = ArrayList();
+        val genresList:ArrayList<String> = ArrayList();
+        switchList.add( view.findViewById(R.id.switch1))
+        switchList.add(  view.findViewById(R.id.switch2))
+        switchList.add(  view.findViewById(R.id.switch3))
+        switchList.add(  view.findViewById(R.id.switch4) )
+        switchList.add(  view.findViewById(R.id.switch5))
+        switchList.add( view.findViewById(R.id.switch6))
+        switchList.add(  view.findViewById(R.id.switch7))
+        switchList.add(  view.findViewById(R.id.switch8))
+        switchList.add(  view.findViewById(R.id.switch9))
+        switchList.add(  view.findViewById(R.id.switch10))
+        switchList.add(  view.findViewById(R.id.switch11))
+        switchList.add(  view.findViewById(R.id.switch12))
+        switchList.add(  view.findViewById(R.id.switch13))
+        switchList.add(  view.findViewById(R.id.switch14))
+        switchList.add(  view.findViewById(R.id.switch15))
+        switchList.add(  view.findViewById(R.id.switch16))
+        switchList.add(  view.findViewById(R.id.switch17))
+        switchList.add(  view.findViewById(R.id.switch18))
         yearSearch.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, currentValue: Int, p2: Boolean) {
                 txtYear.text=((2022-60)+(currentValue)).toString()
@@ -55,8 +77,16 @@ class SearchFilters : Fragment() {
             override fun onStopTrackingTouch(p0: SeekBar?) {}
         })
         searchButton.setOnClickListener {
+            var yearFilter=0
+            if(filterYar.isChecked){yearFilter=txtYear.text.toString().toInt()}
+
+            for (switch in switchList){
+                if (switch.isChecked){
+                    genresList.add(switch.text.toString())
+                }
+            }
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.nav_host_fragment_activity_main, Show_Movie_list(listOf("Acción","Animación"),txtYear.text.toString().toInt()))
+                ?.replace(R.id.nav_host_fragment_activity_main, Show_Movie_list(genresList,yearFilter))
                 ?.commit()
         }
     }

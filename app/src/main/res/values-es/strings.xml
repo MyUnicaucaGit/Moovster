@@ -32,4 +32,5 @@
     <string name="Search_title_text">Busqueda con filtros</string>
     <string name="Genres">Generos</string>
     <string name="Year">Años</string>
+    <string name="filter_by_year">Aplicar este filtro</string>
 </resources>

@@ -33,6 +33,7 @@
     <string name="Search_title_text">Search with filters</string>
     <string name="Genres">Genres</string>
     <string name="Year">Year</string>
+    <string name="filter_by_year">Apply this filter</string>
 
 
 </resources>
