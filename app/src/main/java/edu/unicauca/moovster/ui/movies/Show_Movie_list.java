@@ -32,6 +32,7 @@ import edu.unicauca.moovster.movies.VolleyCallBack;
 public class Show_Movie_list extends Fragment {
     private String query="";
     private int year=0;
+    private boolean filter=false;
     private List<String> genres;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -52,6 +53,7 @@ public class Show_Movie_list extends Fragment {
     public Show_Movie_list(List<String> genres,int year) {
         this.genres=genres;
         this.year=year;
+        this.filter=true;
     }
 
     /**
@@ -94,51 +96,71 @@ public class Show_Movie_list extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Movies myMovies = new Movies(getContext());
 
-        if (this.year!=0){
+        if (this.filter){
+            if (this.year==0){
+                try {
+                    myMovies.getMoviesByGender(this.genres,new VolleyCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                            recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-            try {
-                myMovies.getMoviesByGenderAndYear(this.genres,this.year,new VolleyCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                        recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
+            }else{
+                try {
+                    myMovies.getMoviesByGenderAndYear(this.genres,this.year,new VolleyCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                            recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+
+        }else{
+            if (this.query.equalsIgnoreCase("")){
+
+                try {
+                    myMovies.getMoviesByPopularity(new VolleyCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                            recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                try {
+                    myMovies.searchMovie(this.query,new VolleyCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
+                            recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
+                            recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
         }
 
-        if (this.query.equalsIgnoreCase("")){
 
-            try {
-                myMovies.getMoviesByPopularity(new VolleyCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                        recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        else{
-            try {
-                myMovies.searchMovie(this.query,new VolleyCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        RecyclerView recyclerView = view.findViewById(R.id.RecyclerMovieList);
-                        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-                        recyclerView.setAdapter(new MovieAdapter(myMovies.getRequestedList()));
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

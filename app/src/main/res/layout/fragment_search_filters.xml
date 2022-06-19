@@ -275,6 +275,13 @@
                 android:textColor="@color/letter_white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switchYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/filter_by_year" />
         </TableRow>
 
         <TableRow
@@ -307,6 +314,7 @@
                 android:textColor="@color/letter_white"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
