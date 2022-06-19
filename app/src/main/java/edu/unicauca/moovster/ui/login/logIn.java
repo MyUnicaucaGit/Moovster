@@ -8,6 +8,8 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -24,6 +26,8 @@ import edu.unicauca.moovster.R;
 import edu.unicauca.moovster.db.AdminsSQLHelper;
 import edu.unicauca.moovster.ui.home.HomeFragment;
 import edu.unicauca.moovster.ui.movies.Show_Movie_list;
+import edu.unicauca.moovster.ui.profile.ProfileFF;
+import edu.unicauca.moovster.ui.profile.ProfileFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,7 +102,7 @@ public class logIn extends Fragment {
                     if (isEmailValid){
                         email.setHelperText("");
                     }else {
-                        email.setHelperText("Ingrese un email valido.");
+                        email.setHelperText(getString(R.string.emailHelper));
                         validation = false;
                     }
 
@@ -115,6 +119,10 @@ public class logIn extends Fragment {
                         activity.setUserLogged(true, fila.getString(1));
                         Toast.makeText(getContext(),getString(R.string.loginSuccesfull),Toast.LENGTH_SHORT).show();
                         Db.close();
+                        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace( R.id.nav_host_fragment_activity_main, new HomeFragment());
+                        fragmentTransaction.commit();
                     } else {
                         Toast.makeText(getContext(),getString(R.string.loginWarning),Toast.LENGTH_SHORT).show();
                         Db.close();

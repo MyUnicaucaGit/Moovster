@@ -45,7 +45,7 @@
             android:queryHint="@string/SearchHint" />
 
         <Button
-            android:id="@+id/btnNBUser"
+            android:id="@+id/btnUserLog"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginLeft="5dp"

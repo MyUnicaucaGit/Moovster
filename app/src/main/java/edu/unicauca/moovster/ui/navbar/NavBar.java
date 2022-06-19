@@ -84,7 +84,7 @@ public class NavBar extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btnUser = view.findViewById(R.id.btnNBUser);
+        Button btnUser = view.findViewById(R.id.btnUserLog);
         Button btnFilter = view.findViewById(R.id.btnFilter);
         SearchView search  = view.findViewById(R.id.searchViewMovies);
         btnUser.setOnClickListener(new View.OnClickListener() {

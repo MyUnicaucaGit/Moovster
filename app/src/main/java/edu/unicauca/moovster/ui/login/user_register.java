@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -84,6 +86,8 @@ public class user_register extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnLogin = view.findViewById(R.id.btnSingUpUser);
+        MainActivity activity = (MainActivity) getActivity();
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +138,11 @@ public class user_register extends Fragment {
                             txtPassword.setText("");
 
                             Toast.makeText(getContext(), getString(R.string.loginSuccesfull), Toast.LENGTH_SHORT).show();
+
+                            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace( R.id.nav_host_fragment_activity_main, new login_or_register());
+                            fragmentTransaction.commit();
                         }
 
                     } else {
