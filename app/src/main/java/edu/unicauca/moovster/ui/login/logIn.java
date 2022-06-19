@@ -121,7 +121,7 @@ public class logIn extends Fragment {
                         Db.close();
                         FragmentManager fragmentManager = activity.getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace( R.id.nav_host_fragment_activity_main, new HomeFragment());
+                        fragmentTransaction.replace( R.id.nav_host_fragment_activity_main, new ProfileFragment());
                         fragmentTransaction.commit();
                     } else {
                         Toast.makeText(getContext(),getString(R.string.loginWarning),Toast.LENGTH_SHORT).show();
