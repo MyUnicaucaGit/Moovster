@@ -167,9 +167,9 @@ public class show_movie_info_fragment extends Fragment {
                     inFavs=!inFavs;
                     changeFav();
                     if (inFavs){
-                        favButton.setText("En favoritos");
+                        favButton.setText(getText(R.string.in_fav).toString());
                     }else{
-                        favButton.setText("Agregar a favoritos");
+                        favButton.setText(getText(R.string.out_favs).toString());
                     }
                 }else{
                     Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);

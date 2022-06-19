@@ -26,7 +26,7 @@
                 <ImageView
                     android:id="@+id/infoMovieImg"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="300dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:foregroundGravity="center"
@@ -57,36 +57,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/background_color"
-                        android:text="Button"
+                        android:text="@string/out_favs"
                         android:textSize="10sp"
                         app:icon="@drawable/love"
                         app:iconGravity="top"
                         app:iconSize="30dp"
                         app:iconTint="@color/icons_color" />
 
-                    <Button
-                        android:id="@+id/infoMovieBtnList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_color"
-                        android:text="Button"
-                        android:textSize="10sp"
-                        app:icon="@drawable/add_list"
-                        app:iconGravity="top"
-                        app:iconSize="30dp"
-                        app:iconTint="@color/icons_color" />
-
-                    <Button
-                        android:id="@+id/infoMovieBtnReview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/background_color"
-                        android:text="Button"
-                        android:textSize="10sp"
-                        app:icon="@drawable/add_review"
-                        app:iconGravity="top"
-                        app:iconSize="30dp"
-                        app:iconTint="@color/icons_color" />
                 </LinearLayout>
             </LinearLayout>
 
