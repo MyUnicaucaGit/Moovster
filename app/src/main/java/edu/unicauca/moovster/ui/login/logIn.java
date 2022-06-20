@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import edu.unicauca.moovster.MainActivity;
@@ -115,7 +117,7 @@ public class logIn extends Fragment {
                     }
 
                 if (validation == true) {
-                    Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"' and password = "+txtPassword.getText().toString(),null);
+                    Cursor fila = Db.rawQuery("select name, email from User where email = '"+txtEmail.getText().toString()+"' and password = '"+txtPassword.getText().toString()+"'",null);
                     if (fila.moveToFirst()) {
 
                         activity.setUserLogged(true, fila.getString(1));
@@ -123,9 +125,10 @@ public class logIn extends Fragment {
                         registroUser.put("user_email", txtEmail.getText().toString());
                         registroUser.put("isLogged", "true");
                         Db.insert("UserLogged", null, registroUser);
-
                         Toast.makeText(getContext(),getString(R.string.loginSuccesfull),Toast.LENGTH_SHORT).show();
                         Db.close();
+                        MaterialButton btnUser = getActivity().findViewById(R.id.btnUserLog);
+                        btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.logout));
                         FragmentManager fragmentManager = activity.getSupportFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace( R.id.nav_host_fragment_activity_main, new ProfileFragment());

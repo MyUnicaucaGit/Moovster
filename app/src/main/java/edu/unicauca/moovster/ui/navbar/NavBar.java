@@ -2,10 +2,13 @@ package edu.unicauca.moovster.ui.navbar;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -15,8 +18,11 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
 import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
+import edu.unicauca.moovster.db.AdminsSQLHelper;
 import edu.unicauca.moovster.ui.home.HomeFragment;
 import edu.unicauca.moovster.ui.login.logIn;
 import edu.unicauca.moovster.ui.login.login_or_register;
@@ -84,25 +90,46 @@ public class NavBar extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btnUser = view.findViewById(R.id.btnUserLog);
+        MainActivity d = (MainActivity) getActivity();
+        MaterialButton btnUser = view.findViewById(R.id.btnUserLog);
+
+        if(d.isUserLogged()){
+            btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.logout));
+            btnUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+                    SQLiteDatabase Db = admin.getWritableDatabase();
+                    if(Db.delete("UserLogged",null,null)!=0) {
+                        btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.user));
+                        Db.close();
+                        MainActivity d = (MainActivity) getActivity();
+                        d.setUserLogged(false, "");
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.nav_host_fragment_activity_main, new login_or_register()).addToBackStack(null)
+                                .commit();
+                        Toast.makeText(getContext(),getString(R.string.logoutSuccesfull),Toast.LENGTH_SHORT).show();
+
+                    }else{
+                    Db.close();
+                    }
+                }
+            });
+        }else{
+            btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.user));
+            btnUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity  d= (MainActivity) getActivity();
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
+                                .commit();
+                }
+            });
+        }
+
         Button btnFilter = view.findViewById(R.id.btnFilter);
         SearchView search  = view.findViewById(R.id.searchViewMovies);
-        btnUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity  d= (MainActivity) getActivity();
-                if(d.isUserLogged()){
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_host_fragment_activity_main,new ProfileFF()).addToBackStack(null)
-                            .commit();
-                }else{
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
-                            .commit();
-                }
-
-            }
-        });
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

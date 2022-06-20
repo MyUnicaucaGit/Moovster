@@ -1,13 +1,10 @@
 package edu.unicauca.moovster
 
-import android.app.SearchManager
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -51,6 +48,13 @@ class MainActivity : AppCompatActivity() {
         navView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setBackgroundColor(getResources().getColor(R.color.emotionless_purple));
 
+        val admin = AdminsSQLHelper(this, "dbMoovster", null, 1)
+        val Db = admin.writableDatabase
+        val fila = Db.rawQuery("SELECT user_email FROM UserLogged", null)
+        if (fila.moveToFirst()) {
+            userLogged=true;
+            userEmail=fila.getString(0);
+        }
         }
 
     fun peli(view: View) {

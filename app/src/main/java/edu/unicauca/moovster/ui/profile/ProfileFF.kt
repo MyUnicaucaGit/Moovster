@@ -2,15 +2,15 @@ package edu.unicauca.moovster.ui.profile
 
 import android.database.Cursor
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import edu.unicauca.moovster.MainActivity
 import edu.unicauca.moovster.R
-import edu.unicauca.moovster.ui.home.HomeFragment
+import edu.unicauca.moovster.db.AdminsSQLHelper
 import edu.unicauca.moovster.ui.login.login_or_register
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,30 +49,20 @@ class ProfileFF : Fragment() {
         val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
         val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
         val activity: MainActivity = getActivity() as MainActivity
-        if (!activity.isUserLogged()){
+
+        if (!activity.isUserLogged()) {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.nav_host_fragment_activity_main, login_or_register())
                 ?.commit()
         }
-        /***
 
-        var email:String="pepe@pruebas.com"
 
-        if (email==""){
-            Toast.makeText(context,"Redirigir a iniciar sesion", Toast.LENGTH_SHORT).show()
-        }
-        else{
-            val fila: Cursor = activity.getDB().rawQuery("select name, email from User where email = '"+email+"'",null);
-            if (fila.moveToFirst()){
-                txtName.setText(fila.getString(0))
-                txtEmail.setText(fila.getString(1))
+        var avtivity: MainActivity = MainActivity() as MainActivity
+
+        var email:String=avtivity.getUserEmail()
+                txtName.setText(activity.getUserEmail())
+                txtEmail.setText(activity.getUserEmail()+" TODO: name")
                 activity.getDB().close()
-            }
-            else{
-                Toast.makeText(context,"No hay usuario", Toast.LENGTH_SHORT).show()
-                activity.getDB().close()
-            }
-        }**/
 
     }
 
