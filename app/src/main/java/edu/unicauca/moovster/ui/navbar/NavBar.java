@@ -94,7 +94,7 @@ public class NavBar extends Fragment {
         MaterialButton btnUser = view.findViewById(R.id.btnUserLog);
         if(d.isUserLogged()){
             btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.logout));}
-        else{btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.login));}
+        else{btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.user));}
 
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override

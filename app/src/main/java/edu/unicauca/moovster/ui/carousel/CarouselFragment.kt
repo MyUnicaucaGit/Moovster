@@ -5,9 +5,7 @@ import android.service.autofill.OnClickAction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +24,7 @@ import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
 import org.w3c.dom.Text
 import java.text.FieldPosition
 
-class CarouselFragment(var gender: String) : Fragment(){
+class CarouselFragment(var gender: String, var title: String) : Fragment(){
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<MovieViewHolder>? = null
@@ -49,10 +47,30 @@ class CarouselFragment(var gender: String) : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title : TextView? = view?.findViewById<TextView>(R.id.title_card)
-        title?.text=this.gender;
+        val img : ImageView? = view?.findViewById<ImageView>(R.id.infoMovieImg)
+        var genderList:List<String> = ArrayList();
+
+        when (gender) {
+            "Sustos" -> {
+                genderList = listOf("Terror")
+                img?.setImageResource(R.drawable.ghosts)
+            }
+
+            "Adventure" -> {
+                genderList = listOf("Aventura", "Acción")
+
+                img?.setImageResource(R.drawable.adventure)
+            }
+
+
+            "Western" ->  {genderList= listOf("Western")
+            img?.setImageResource(R.drawable.western)}
+        }
+
+        title?.text=this.title;
         val myMovies = Movies(context);
 
-        myMovies.getMoviesByGender(listOf(gender), VolleyCallBack {
+        myMovies.getMoviesByGender(genderList, VolleyCallBack {
             val recyclerView = view.findViewById<CarouselRecyclerview>(R.id.recyclerCarousel)
             recyclerView.layoutManager= recyclerView.getCarouselLayoutManager()
             try {

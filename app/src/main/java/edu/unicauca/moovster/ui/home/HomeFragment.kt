@@ -1,6 +1,5 @@
 package edu.unicauca.moovster.ui.home
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import edu.unicauca.moovster.MainActivity
 import edu.unicauca.moovster.adapter.MovieViewHolder
 import edu.unicauca.moovster.databinding.FragmentHomeBinding
+import edu.unicauca.moovster.db.AdminsSQLHelper
+import edu.unicauca.moovster.role.Rol
 import edu.unicauca.moovster.ui.carousel.CarouselFragment
 
 
@@ -53,19 +55,35 @@ class HomeFragment : Fragment() {
         // Create new fragment
         if (!accedido) {
             accedido=true
-            fragmentAnimacion = CarouselFragment("Animación");
-            fragmentAccion = CarouselFragment("Acción");
-            fragmentDrama = CarouselFragment("Suspense");
 
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(edu.unicauca.moovster.R.id.containerHome,
-                    fragmentAnimacion as CarouselFragment
-                )
-                ?.add(edu.unicauca.moovster.R.id.containerHome, fragmentAccion as CarouselFragment)
-                ?.add(edu.unicauca.moovster.R.id.containerHome, fragmentDrama as CarouselFragment)
-                ?.commit();
+            for (rol in getRoles()){
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(edu.unicauca.moovster.R.id.containerHome,
+                        CarouselFragment(rol.roleName, rol.roleTitle) as CarouselFragment
+                    )
+                    ?.commit();
+            }
             accedido=false
         }
 
+    }
+
+    private fun getRoles():ArrayList<Rol>{
+
+        var rol:ArrayList<Rol> = ArrayList();
+        val admin: AdminsSQLHelper = AdminsSQLHelper(context, "dbMoovster", null, 1)
+        val Db = admin.writableDatabase
+        val activity = activity as MainActivity?
+
+        val fila = Db.query("Role",null,null,null,null,null,null)
+
+        with(fila) {
+            while (moveToNext()) {
+                val newRol = Rol(getString(0),getString(2),getString(1))
+                rol.add(newRol)
+            }
+        }
+
+        return rol;
     }
 }

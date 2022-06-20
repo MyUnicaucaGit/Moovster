@@ -1,5 +1,6 @@
 package edu.unicauca.moovster
 
+import android.content.ContentValues
 import android.content.res.ColorStateList
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
@@ -50,11 +51,32 @@ class MainActivity : AppCompatActivity() {
 
         val admin = AdminsSQLHelper(this, "dbMoovster", null, 1)
         val Db = admin.writableDatabase
+
+        val registroRol2:ContentValues = ContentValues()
+        registroRol2.put("roleName", "Adventure")
+        registroRol2.put("roleDescription", "Hay demasiadas aventuuras ahi en la pantalla, esperando aser vistas...")
+        registroRol2.put("RoleTitle", "Un aventurero, no por eleccion, sino por destino")
+        Db.insert("Role", null, registroRol2)
+
+        val registroRol:ContentValues = ContentValues()
+        registroRol.put("roleName", "Sustos")
+        registroRol.put("roleDescription", "Una lista de peliculas enfocada para ti que te gustan las peliculas de terror, si esta noche quieres conciliar el sueño, este no es un genero para ti. ")
+        registroRol.put("RoleTitle", "Para el miedo no hay limite")
+        Db.insert("Role", null, registroRol)
+
+
+        val registroRol3:ContentValues = ContentValues()
+        registroRol3.put("roleName", "Western")
+        registroRol3.put("roleDescription", "Una lista de peliculas enfocada para ti, que te sientes como en el viejo oeste")
+        registroRol3.put("RoleTitle", "El sherif del lugar")
+        Db.insert("Role", null, registroRol3)
+
         val fila = Db.rawQuery("SELECT user_email FROM UserLogged", null)
         if (fila.moveToFirst()) {
             userLogged=true;
             userEmail=fila.getString(0);
         }
+        Db.close()
         }
 
     fun peli(view: View) {
