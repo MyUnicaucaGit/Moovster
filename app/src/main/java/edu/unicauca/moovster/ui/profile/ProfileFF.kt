@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import edu.unicauca.moovster.MainActivity
 import edu.unicauca.moovster.R
 import edu.unicauca.moovster.db.AdminsSQLHelper
+import edu.unicauca.moovster.role.Rol
+import edu.unicauca.moovster.ui.carousel.CarouselFragment
 import edu.unicauca.moovster.ui.login.login_or_register
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,9 +48,11 @@ class ProfileFF : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
-        val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
+        val admin = AdminsSQLHelper(context, "dbMoovster", null, 1)
+        val Db = admin.writableDatabase
         val activity: MainActivity = getActivity() as MainActivity
+
+        val filaRoles = Db.rawQuery("SELECT rol FROM User_Rol WHERE user_email = '"+activity.getUserEmail()+"'", null)
 
         if (!activity.isUserLogged()) {
             activity?.supportFragmentManager?.beginTransaction()
@@ -56,14 +60,15 @@ class ProfileFF : Fragment() {
                 ?.commit()
         }
 
+        val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
+        val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
 
-        var avtivity: MainActivity = MainActivity() as MainActivity
+        val txtRolName: TextView = view.findViewById<TextView>(R.id.rolTitle)
+        val txtRolDescription: TextView = view.findViewById<TextView>(R.id.rolDescription)
 
-        var email:String=avtivity.getUserEmail()
-                txtName.setText(activity.getUserEmail())
-                txtEmail.setText(activity.getUserEmail()+" TODO: name")
-                activity.getDB().close()
-
+        txtName.setText(activity.getUserName())
+        txtEmail.setText(activity.getUserEmail())
+        activity.getDB().close()
     }
 
     companion object {

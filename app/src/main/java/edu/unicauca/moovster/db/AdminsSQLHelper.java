@@ -24,7 +24,7 @@ public class AdminsSQLHelper extends SQLiteOpenHelper {
         dbMoovster.execSQL("CREATE TABLE User ( name String, email String PRIMARY KEY,  password String NOT NULL);");
         dbMoovster.execSQL("CREATE TABLE Rol ( rolName String PRIMARY KEY,  rolDescription String,  RolTitle String);");
         dbMoovster.execSQL("CREATE TABLE Movies(movie_id INTEGER, stars Int DEFAULT 0, views Int DEFAULT 0, fav Boolean DEFAULT false, user_email String,  PRIMARY KEY (movie_id, user_email),FOREIGN KEY (user_email) REFERENCES User (email) ON DELETE CASCADE ON UPDATE NO ACTION);");
-        dbMoovster.execSQL("CREATE TABLE User_Rol( user_email String,  rol String,  FOREIGN KEY (user_email) REFERENCES User (email) ON DELETE CASCADE ON UPDATE NO ACTION, FOREIGN KEY (rol) REFERENCES Rol (email) ON DELETE CASCADE ON UPDATE NO ACTION);");
+        dbMoovster.execSQL("CREATE TABLE User_Rol( user_email String,  rol String,  FOREIGN KEY (user_email) REFERENCES User (email) ON DELETE CASCADE ON UPDATE NO ACTION, FOREIGN KEY (rol) REFERENCES Rol (rolName) ON DELETE CASCADE ON UPDATE NO ACTION);");
         dbMoovster.execSQL("CREATE TABLE UserLogged (user_email String PRIMARY KEY, isLogged Boolean DEFAULT false, FOREIGN KEY (user_email) REFERENCES User (email) ON DELETE CASCADE ON UPDATE NO ACTION);");
     }
 

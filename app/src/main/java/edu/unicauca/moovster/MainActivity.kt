@@ -20,7 +20,8 @@ import edu.unicauca.moovster.ui.movies.show_movie_info_fragment
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var userLogged:Boolean = false;
-    private var userEmail:String ="";
+    private var userEmail:String ="E";
+    private var userName:String ="N";
     private lateinit var admin:AdminsSQLHelper;
     private lateinit var Db: SQLiteDatabase;
 
@@ -53,28 +54,31 @@ class MainActivity : AppCompatActivity() {
         val Db = admin.writableDatabase
 
         val registroRol2:ContentValues = ContentValues()
-        registroRol2.put("roleName", "Adventure")
-        registroRol2.put("roleDescription", "Hay demasiadas aventuuras ahi en la pantalla, esperando aser vistas...")
-        registroRol2.put("RoleTitle", "Un aventurero, no por eleccion, sino por destino")
-        Db.insert("Role", null, registroRol2)
+        registroRol2.put("rolName", "Adventure")
+        registroRol2.put("rolDescription", "Hay demasiadas aventuuras ahi en la pantalla, esperando aser vistas...")
+        registroRol2.put("RolTitle", "Un aventurero, no por eleccion, sino por destino")
+        Db.insert("Rol", null, registroRol2)
 
         val registroRol:ContentValues = ContentValues()
-        registroRol.put("roleName", "Sustos")
-        registroRol.put("roleDescription", "Una lista de peliculas enfocada para ti que te gustan las peliculas de terror, si esta noche quieres conciliar el sueño, este no es un genero para ti. ")
-        registroRol.put("RoleTitle", "Para el miedo no hay limite")
-        Db.insert("Role", null, registroRol)
-
+        registroRol.put("rolName", "Sustos")
+        registroRol.put("rolDescription", "Una lista de peliculas enfocada para ti que te gustan las peliculas de terror, si esta noche quieres conciliar el sueño, este no es un genero para ti. ")
+        registroRol.put("RolTitle", "Para el miedo no hay limite")
+        Db.insert("Rol", null, registroRol)
 
         val registroRol3:ContentValues = ContentValues()
-        registroRol3.put("roleName", "Western")
-        registroRol3.put("roleDescription", "Una lista de peliculas enfocada para ti, que te sientes como en el viejo oeste")
-        registroRol3.put("RoleTitle", "El sherif del lugar")
-        Db.insert("Role", null, registroRol3)
+        registroRol3.put("rolName", "Western")
+        registroRol3.put("rolDescription", "Una lista de peliculas enfocada para ti, que te sientes como en el viejo oeste")
+        registroRol3.put("RolTitle", "El sherif del lugar")
+        Db.insert("Rol", null, registroRol3)
 
         val fila = Db.rawQuery("SELECT user_email FROM UserLogged", null)
         if (fila.moveToFirst()) {
             userLogged=true;
             userEmail=fila.getString(0);
+            val filaUser = Db.rawQuery("SELECT name FROM User WHERE email ='"+userEmail+"'",null);
+            if(filaUser.moveToFirst()){
+            userName = filaUser.getString(0)
+            }
         }
         Db.close()
         }
@@ -98,6 +102,10 @@ class MainActivity : AppCompatActivity() {
 
     fun getUserEmail():String{
         return this.userEmail;
+    }
+
+    fun getUserName():String{
+        return this.userName;
     }
 
     fun getDB(): SQLiteDatabase {

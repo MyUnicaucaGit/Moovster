@@ -219,7 +219,76 @@
                 android:textStyle="bold"></TextView>
         </LinearLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_roles"
+            android:textColor="@color/letter_white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            ></TextView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardRol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@color/emotionless_purple"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="16dp"
+            app:contentPadding="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/infoRol"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/rolPicture"
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="0"
+                        android:src="@drawable/user"
+                        app:tint="@color/icons_color" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rolTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Nombre"
+                            android:textColor="@color/letter_white"
+                            android:textSize="15dp"
+                            android:textStyle="bold"></TextView>
+                        <TextView
+                            android:id="@+id/rolDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Email"
+                            android:textColor="@color/letter_white"
+                            android:textSize="15dp"
+                            android:textStyle="bold"></TextView>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 

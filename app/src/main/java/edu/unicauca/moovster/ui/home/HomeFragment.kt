@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
             for (rol in getRoles()){
                 activity?.supportFragmentManager?.beginTransaction()
                     ?.add(edu.unicauca.moovster.R.id.containerHome,
-                        CarouselFragment(rol.roleName, rol.roleTitle) as CarouselFragment
+                        CarouselFragment(rol.rolName, rol.rolTitle) as CarouselFragment
                     )
                     ?.commit();
             }
@@ -75,7 +75,7 @@ class HomeFragment : Fragment() {
         val Db = admin.writableDatabase
         val activity = activity as MainActivity?
 
-        val fila = Db.query("Role",null,null,null,null,null,null)
+        val fila = Db.query("Rol",null,null,null,null,null,null)
 
         with(fila) {
             while (moveToNext()) {

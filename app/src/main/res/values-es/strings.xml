@@ -36,4 +36,5 @@
     <string name="logoutSuccesfull">Ha cerrado sesion correctamente</string>
     <string name="in_fav">En favoritos</string>
     <string name="out_favs">Agregar a favoritos</string>
+    <string name="user_roles">Roles del Usuario</string>
 </resources>

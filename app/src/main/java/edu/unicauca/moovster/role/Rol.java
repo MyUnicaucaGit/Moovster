@@ -11,27 +11,27 @@ public class Rol {
         this.rolDescription = roleDescription;
     }
 
-    public String getRoleName() {
+    public String getRolName() {
         return rolName;
     }
 
-    public void setRoleName(String roleName) {
-        this.rolName = roleName;
+    public void setRolName(String rolName) {
+        this.rolName = rolName;
     }
 
-    public String getRoleTitle() {
+    public String getRolTitle() {
         return rolTitle;
     }
 
-    public void setRoleTitle(String roleTitle) {
-        this.rolTitle = roleTitle;
+    public void setRolTitle(String rolTitle) {
+        this.rolTitle = rolTitle;
     }
 
-    public String getRoleDescription() {
+    public String getRolDescription() {
         return rolDescription;
     }
 
-    public void setRoleDescription(String roleDescription) {
-        this.rolDescription = roleDescription;
+    public void setRolDescription(String rolDescription) {
+        this.rolDescription = rolDescription;
     }
 }

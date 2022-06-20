@@ -131,6 +131,7 @@ public class user_register extends Fragment {
                             registroUser.put("password", txtPassword.getText().toString());
                             MainActivity activity = (MainActivity) getActivity();
                             Db.insert("User", null, registroUser);
+
                             Db.close();
 
                             txtName.setText("");
