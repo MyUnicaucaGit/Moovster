@@ -34,4 +34,6 @@
     <string name="Year">Años</string>
     <string name="filter_by_year">Aplicar este filtro</string>
     <string name="logoutSuccesfull">Ha cerrado sesion correctamente</string>
+    <string name="in_fav">En favoritos</string>
+    <string name="out_favs">Agregar a favoritos</string>
 </resources>

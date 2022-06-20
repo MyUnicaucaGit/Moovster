@@ -1,5 +1,8 @@
 package edu.unicauca.moovster.ui.movies;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -7,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +32,21 @@ import java.util.Calendar;
 
 import edu.unicauca.moovster.MainActivity;
 import edu.unicauca.moovster.R;
+import edu.unicauca.moovster.db.AdminsSQLHelper;
 import edu.unicauca.moovster.movies.Movie;
 import edu.unicauca.moovster.movies.Movies;
 import edu.unicauca.moovster.movies.VolleyCallBack;
 import edu.unicauca.moovster.ui.home.HomeFragment;
+import edu.unicauca.moovster.ui.profile.ProfileFragment;
 
 public class show_movie_info_fragment extends Fragment {
     private int movieId;
     private  int cont=0;
     private String tagForBack="";
+    private String email ="";
+    private int star=0;
+    private boolean inFavs=false;
+    private int views=0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +73,8 @@ public class show_movie_info_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        MainActivity main = (MainActivity) getActivity();
+        this.email=main.getUserEmail();
         // Inflate the layout for this fragment
         Object callback = new OnBackPressedCallback(true) {
             @Override
@@ -95,6 +108,7 @@ public class show_movie_info_fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MainActivity main = (MainActivity) getActivity();
+
         Button viewsButton = view.findViewById(R.id.infoMovieBtnViews);
         MaterialButton favButton=view.findViewById(R.id.infoMovieBtnFav);
         MaterialButton star1=view.findViewById(R.id.infoMovieBtnStar1);
@@ -127,15 +141,16 @@ public class show_movie_info_fragment extends Fragment {
             public void onClick(View v) {
                 changeStars(5);
             }});
-        viewsButton.setText("Vista "+cont+" veces");
+        viewsButton.setText("Vista "+views+" veces");
         viewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // código a ejecutar cuando sea pulsado
 
                 if (main.isUserLogged()){
-                    cont++;
-                    viewsButton.setText("Vista "+cont+" veces");
+                    views++;
+                    increaseViews();
+                    viewsButton.setText("Vista "+views+" veces");
                 }else{
                     Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
                     toast.show();
@@ -149,18 +164,36 @@ public class show_movie_info_fragment extends Fragment {
                 // código a ejecutar cuando sea pulsado
 
                 if (main.isUserLogged()){
-                    favButton.setText("En favoritas");
+                    inFavs=!inFavs;
+                    changeFav();
+                    if (inFavs){
+                        favButton.setText(getText(R.string.in_fav).toString());
+                    }else{
+                        favButton.setText(getText(R.string.out_favs).toString());
+                    }
                 }else{
                     Toast toast = Toast.makeText(getContext(), getString(R.string.not_available_functionality), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
+        if (main.isUserLogged()){
+            veryUser();
+            changeStars(this.star);
+            if (this.inFavs){
+                favButton.setText("En favoritos");
+            }else{
+                favButton.setText("Agregar a favoritos");
+            }
+            viewsButton.setText("Vista "+views+" veces");
+        }
         fillInfo(view);
     }
 
     private void changeStars(int star){
         MainActivity main = (MainActivity) getActivity();
+        this.star=star;
+        changeStars();
         if (main.isUserLogged()){
 
             ArrayList<MaterialButton> stars= new ArrayList<MaterialButton>();
@@ -211,6 +244,55 @@ public class show_movie_info_fragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void veryUser(){
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+        SQLiteDatabase Db = admin.getWritableDatabase();
+        Cursor fila = Db.rawQuery("select * from Movies where user_email = '"+this.email+"' and movie_id = "+this.movieId,null);
+        if (fila.moveToFirst()) {
+            this.star=fila.getInt(1);
+            this.views= fila.getInt(2);
+            this.inFavs= fila.getInt(3)==1;
+            Db.close();
+        } else {
+            ContentValues registroUser = new ContentValues();
+            registroUser.put("user_email", this.email);
+            registroUser.put("movie_id", this.movieId);
+            Db.insert("Movies", null, registroUser);
+            Db.close();
+        }
+
+    }
+
+    private void increaseViews(){
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+        SQLiteDatabase Db = admin.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("views",this.views);
+        Db.update("Movies",cv,"movie_id = "+this.movieId+ " and user_email ='"+this.email+"'",null);
+
+        Db.close();
+    }
+
+    private void changeStars(){
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+        SQLiteDatabase Db = admin.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("stars",this.star);
+        Db.update("Movies",cv,"movie_id = "+this.movieId+ " and user_email ='"+this.email+"'",null);
+
+        Db.close();
+    }
+
+    private void changeFav(){
+        AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
+        SQLiteDatabase Db = admin.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("fav",this.inFavs);
+        Db.update("Movies",cv,"movie_id = "+this.movieId+ " and user_email ='"+this.email+"'",null);
+
+        Db.close();
     }
 
 }

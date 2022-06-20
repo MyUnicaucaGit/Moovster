@@ -33,6 +33,8 @@
     <string name="Year">Year</string>
     <string name="filter_by_year">Apply this filter</string>
     <string name="logoutSuccesfull">You are successfully logged out</string>
+    <string name="in_fav">In favs</string>
+    <string name="out_favs">Add to favs</string>
 
 
 </resources>
