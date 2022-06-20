@@ -92,12 +92,14 @@ public class NavBar extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         MainActivity d = (MainActivity) getActivity();
         MaterialButton btnUser = view.findViewById(R.id.btnUserLog);
-
         if(d.isUserLogged()){
-            btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.logout));
-            btnUser.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.logout));}
+        else{btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.login));}
+
+        btnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (d.isUserLogged()){
                     AdminsSQLHelper admin = new AdminsSQLHelper(getContext(), "dbMoovster", null, 1);
                     SQLiteDatabase Db = admin.getWritableDatabase();
                     if(Db.delete("UserLogged",null,null)!=0) {
@@ -111,22 +113,20 @@ public class NavBar extends Fragment {
                         Toast.makeText(getContext(),getString(R.string.logoutSuccesfull),Toast.LENGTH_SHORT).show();
 
                     }else{
-                    Db.close();
+                        Db.close();
                     }
+                }else{
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
+                            .commit();
                 }
-            });
-        }else{
-            btnUser.setIcon(ContextCompat.getDrawable(getContext(),R.drawable.user));
-            btnUser.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity  d= (MainActivity) getActivity();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.nav_host_fragment_activity_main,new login_or_register()).addToBackStack(null)
-                                .commit();
-                }
-            });
-        }
+
+            }
+        });
+
+
+
+
 
         Button btnFilter = view.findViewById(R.id.btnFilter);
         SearchView search  = view.findViewById(R.id.searchViewMovies);
