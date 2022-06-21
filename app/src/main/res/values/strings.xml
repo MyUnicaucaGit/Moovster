@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moovster</string>
     <string name="title_home">Home</string>
-    <string name="title_favs">Favourites</string>
+    <string name="title_favs">Discover</string>
     <string name="title_profile">Profile</string>
     <string name="btnFilter">Filter</string>
     <string name="showMovieInfoYear">Year:</string>

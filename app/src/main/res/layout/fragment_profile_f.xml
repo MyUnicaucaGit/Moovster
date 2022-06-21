@@ -5,15 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFF"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <fragment
-        android:id="@+id/fragmentNavBarView"
-        android:name="edu.unicauca.moovster.ui.movies.show_movie_info_fragment"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -232,7 +226,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardRol"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_margin="20dp"
             app:cardBackgroundColor="@color/emotionless_purple"
             app:cardCornerRadius="10dp"
@@ -260,7 +254,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_weight="0"
                         android:src="@drawable/user"
-                        app:tint="@color/icons_color" />
+                       />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -274,7 +268,7 @@
                             android:layout_weight="1"
                             android:text="Nombre"
                             android:textColor="@color/letter_white"
-                            android:textSize="15dp"
+                            android:textSize="17dp"
                             android:textStyle="bold"></TextView>
                         <TextView
                             android:id="@+id/rolDescription"
@@ -283,13 +277,12 @@
                             android:layout_weight="1"
                             android:text="Email"
                             android:textColor="@color/letter_white"
-                            android:textSize="15dp"
-                            android:textStyle="bold"></TextView>
+                            android:textSize="12dp"
+                            ></TextView>
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-
-
+    </ScrollView>
 </FrameLayout>

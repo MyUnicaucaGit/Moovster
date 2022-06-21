@@ -121,6 +121,7 @@ public class logIn extends Fragment {
                     if (fila.moveToFirst()) {
 
                         activity.setUserLogged(true, fila.getString(1));
+                        activity.setUserName(fila.getString(0));
                         ContentValues registroUser = new ContentValues();
                         registroUser.put("user_email", txtEmail.getText().toString());
                         registroUser.put("isLogged", "true");

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -59,13 +60,34 @@ class ProfileFF : Fragment() {
                 ?.replace(R.id.nav_host_fragment_activity_main, login_or_register())
                 ?.commit()
         }
-
         val txtName: TextView = view.findViewById<TextView>(R.id.profile_name)
         val txtEmail: TextView = view.findViewById<TextView>(R.id.profile_email)
 
-        val txtRolName: TextView = view.findViewById<TextView>(R.id.rolTitle)
+        val txtRolTitle: TextView = view.findViewById<TextView>(R.id.rolTitle)
         val txtRolDescription: TextView = view.findViewById<TextView>(R.id.rolDescription)
+        val imgRol: ImageView = view.findViewById<ImageView>(R.id.rolPicture)
+        var imgRolName: String = ""
 
+        if(filaRoles.moveToFirst()){
+            for (rol in getRoles()){
+                if (filaRoles.getString(0) == rol.rolName) {
+                    txtRolTitle.setText(rol.rolTitle)
+                    txtRolDescription.setText(rol.rolDescription)
+                    imgRolName=rol.rolName;
+                    }
+                }
+            when (imgRolName) {
+                "Sustos" -> {
+                    imgRol.setImageResource(R.drawable.ghosts)
+                }
+                "Adventure" -> {
+                    imgRol.setImageResource(R.drawable.adventure)
+                }
+                "Western" ->  {
+                    imgRol.setImageResource(R.drawable.western)
+                }
+            }
+            }
         txtName.setText(activity.getUserName())
         txtEmail.setText(activity.getUserEmail())
         activity.getDB().close()
@@ -89,5 +111,24 @@ class ProfileFF : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun getRoles():ArrayList<Rol>{
+
+        var rol:ArrayList<Rol> = ArrayList();
+        val admin: AdminsSQLHelper = AdminsSQLHelper(context, "dbMoovster", null, 1)
+        val Db = admin.writableDatabase
+        val activity = activity as MainActivity?
+
+        val fila = Db.query("Rol",null,null,null,null,null,null)
+
+        with(fila) {
+            while (moveToNext()) {
+                val newRol = Rol(getString(0),getString(2),getString(1))
+                rol.add(newRol)
+            }
+        }
+        Db.close();
+        return rol;
     }
 }

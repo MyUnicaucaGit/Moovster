@@ -36,6 +36,17 @@ class MainActivity : AppCompatActivity() {
         admin = AdminsSQLHelper(this, "dbMoovster", null, 1)
         Db = admin.writableDatabase
 
+        val fila = Db.rawQuery("SELECT user_email FROM UserLogged", null)
+        if (fila.moveToFirst()) {
+            userLogged=true;
+            userEmail=fila.getString(0);
+            val filaUser = Db.rawQuery("SELECT name FROM User WHERE email ='"+userEmail+"'",null);
+            if(filaUser.moveToFirst()){
+                userName = filaUser.getString(0)
+            }
+        }
+        Db.close()
+
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
@@ -45,43 +56,12 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
         navView.setItemIconTintList(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.icons_color)));
         navView.setBackgroundColor(getResources().getColor(R.color.emotionless_purple));
 
-        val admin = AdminsSQLHelper(this, "dbMoovster", null, 1)
-        val Db = admin.writableDatabase
 
-        val registroRol2:ContentValues = ContentValues()
-        registroRol2.put("rolName", "Adventure")
-        registroRol2.put("rolDescription", "Hay demasiadas aventuuras ahi en la pantalla, esperando aser vistas...")
-        registroRol2.put("RolTitle", "Un aventurero, no por eleccion, sino por destino")
-        Db.insert("Rol", null, registroRol2)
-
-        val registroRol:ContentValues = ContentValues()
-        registroRol.put("rolName", "Sustos")
-        registroRol.put("rolDescription", "Una lista de peliculas enfocada para ti que te gustan las peliculas de terror, si esta noche quieres conciliar el sueño, este no es un genero para ti. ")
-        registroRol.put("RolTitle", "Para el miedo no hay limite")
-        Db.insert("Rol", null, registroRol)
-
-        val registroRol3:ContentValues = ContentValues()
-        registroRol3.put("rolName", "Western")
-        registroRol3.put("rolDescription", "Una lista de peliculas enfocada para ti, que te sientes como en el viejo oeste")
-        registroRol3.put("RolTitle", "El sherif del lugar")
-        Db.insert("Rol", null, registroRol3)
-
-        val fila = Db.rawQuery("SELECT user_email FROM UserLogged", null)
-        if (fila.moveToFirst()) {
-            userLogged=true;
-            userEmail=fila.getString(0);
-            val filaUser = Db.rawQuery("SELECT name FROM User WHERE email ='"+userEmail+"'",null);
-            if(filaUser.moveToFirst()){
-            userName = filaUser.getString(0)
-            }
-        }
-        Db.close()
-        }
+    }
 
     fun peli(view: View) {
         val id :String= view.contentDescription as String;
@@ -111,4 +91,9 @@ class MainActivity : AppCompatActivity() {
     fun getDB(): SQLiteDatabase {
         return this.Db;
     }
+
+    fun setUserName(userN: String){
+        this.userName=userN;
+    }
+
 }

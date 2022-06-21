@@ -132,6 +132,10 @@ public class user_register extends Fragment {
                             MainActivity activity = (MainActivity) getActivity();
                             Db.insert("User", null, registroUser);
 
+                            ContentValues registroUserRol = new ContentValues();
+                            registroUserRol.put("user_email", txtEmail.getText().toString());
+                            registroUserRol.put("rol", "Sustos");
+                            Db.insert("User_Rol",null, registroUserRol);
                             Db.close();
 
                             txtName.setText("");

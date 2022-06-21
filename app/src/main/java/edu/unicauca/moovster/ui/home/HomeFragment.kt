@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
                 rol.add(newRol)
             }
         }
-
+        Db.close();
         return rol;
     }
 }
